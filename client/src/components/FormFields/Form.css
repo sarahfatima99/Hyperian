@@ -1,0 +1,201 @@
+.form-builder-navbar{
+    width: 1060px;
+
+}
+
+.tools-side-bar{
+    height: 1090px;    
+    
+    border-right:2px solid rgba(240, 230, 230, 0.76);
+  
+}
+.logic-design-side-bar{
+  
+
+    border-top:2px solid rgba(240, 230, 230, 0.76);
+    height: 1090px;
+    border-left:2px solid rgba(221, 210, 210, 0.76);
+}
+
+.dropdown-toggle::after {
+    border: 0;
+}
+.add-button{
+    margin-top: 10px;
+    margin-right: 5px;
+    text-align: right;
+}
+
+.dropdown-toggle::after {
+ 
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left:0;
+}
+
+.dropdown-menu {
+    margin-left: 20px;
+    margin-top: 15px;
+    width: 908px;
+    height: 600px;
+    transition: all 0.5s ease;
+   
+}
+
+.Tab-list{
+   
+    padding: 0px 10px;
+}
+
+  .side-bar-content{
+      cursor: pointer;
+      font-size:20px;
+      /* background-color: rgb(14, 114, 92); */
+      margin-top: 20px;
+      margin-left: 20px;  
+      text-align: center;    
+      border-radius: 3px;
+      padding: 10px 6px ;
+  }
+
+  .column.side-panel    {
+
+      width: 30%;
+  }
+
+  .column.panel-content{
+      width: 70%;
+  }
+
+ .column.side-panel-tab{
+float: left;
+ }
+
+.drop-down-item-row1{
+    margin-left:75px ;
+    margin-top: 5px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+}
+
+button#dropdown-button-drop-end.dropdown-toggle.btn.btn-primary::after{
+    
+    border: 0;
+
+}
+
+.dropdown-toggle.btn.btn-primary{
+    border-color:  rgb(118, 202, 139);;
+    background-color: rgb(118, 202, 139);
+}
+
+
+.primary.dropdown-toggle{
+    border-color:  rgb(118, 202, 139);;
+}
+
+a.tab-nav-link.nav-link{
+    padding-left: 70px;
+    border-top: 0px;
+   
+ 
+    /* padding-top: 0px; */
+   
+    font-size: 20px;
+    padding-right: 68px;
+}
+
+a.tab-nav-link.nav-link.active{
+      background-color: rgb(118, 202, 139);
+
+}
+
+.tab-nav-link{
+
+cursor: pointer;
+}
+
+
+.row.row1{
+margin-top: 10px;
+}
+
+.headings{
+ 
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.headings.choice{
+    
+    margin-left: 90px;
+}
+.headings.upload{
+    margin-left: 90px;
+}
+.headings.descriptive{
+  
+    margin-left: 85px;
+}
+
+.contact-items{
+    margin-left: 300px;
+}
+
+.general-items{
+    margin-left: 120px;
+}
+
+.headings.general{
+    margin-left: 30px;
+
+}
+
+.drop-down-item-row2{
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+}
+
+
+.dialogue-box{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logic-heading{
+    color: rgb(71, 68, 68);
+    font-size: 25px;
+    margin-top: 120px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-text{
+    font-weight: 500;
+    padding: 10px 15px;
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: rgba(201, 189, 189, 0.616);
+}
+
+div.MuiDialogTitle-root{
+    padding-bottom: 0;
+}
+
+.control{
+    font-size: 15px;
+    color: rgb(116, 110, 110);
+    padding-left: 25px;
+}
+
+
+.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+width: 50%;
+
+
+}

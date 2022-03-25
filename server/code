@@ -1,0 +1,171 @@
+const express = require('express');
+const cors = require("cors");
+const app = express()
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
+app.use(express.json());
+app.use(cors())
+app.use(express.urlencoded())
+const passportCustom = require('passport-custom');
+
+
+
+app.use(
+    cors()
+);
+
+
+var sql = require("mssql");
+const { response } = require('express');
+
+var config = {
+    user: 'sarah',
+    password: 'sarahfatima99',
+    server: 'DESKTOP-MFGD6N8',
+    database: 'Hyperian',
+
+
+    options: {
+        trustServerCertificate: true,
+        trustedConnection: false,
+        enableArithAbort: true
+
+    },
+    port: 1433
+
+};
+
+
+sql.connect(config, function (err) {
+    if (err) console.log(err);
+    console.log("connected")
+});
+var request = new sql.Request()
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+    cors({
+        origin: "http://localhost:3000", // <-- location of the react app were connecting to
+        credentials: true,
+    })
+);
+
+app.use(
+    session({
+        secret: "secretcode",
+        resave: true,
+        saveUninitialized: true,
+    })
+);
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./passport.config")(passport);
+
+const CustomStrategy = passportCustom.Strategy;
+
+
+app.get("/", (req, res) => {
+
+
+    res.send("My api");
+
+})
+
+
+app.post("/register", (req, res) => {
+
+    const name = req.body.name
+    const email = req.body.email
+    request.query(`select * from  [Hyperian].[dbo].[Users] where Email = '${email}'`, function (err, recordset) {
+        if (recordset['recordset'][0]) {
+            res.send({ message: "user already registered" })
+        }
+        else {
+            bcrypt.hash(req.body.password, 10).then((hash) => {
+
+                const password = hash
+                console.log(recordset);
+                request.query(`INSERT INTO [Hyperian].[dbo].[Users] VALUES ('${name}', '${email}','${password}')`, function (err, recordset) {
+                    if (err) console.log(err)
+                    res.send({ message: "user registered" })
+                });
+            })
+        }
+    })
+})
+
+
+
+passport.use('myStrategy', new CustomStrategy(
+    function (req, done) {
+        console.log(req.body)
+
+        request.query(`select * from  [Hyperian].[dbo].[Users] where Email = '${req.body.email}'`, function (err, recordset) {
+            console.log(recordset['recordset'][0])
+            if (recordset['recordset'][0]) {
+                // console.log(recordset)
+                bcrypt.compare(req.body.password, recordset['recordset'][0].Password, (err, results) => {
+                    if (err)
+                        throw err
+                    if (results === true) {
+
+                        return done(null, recordset['recordset'][0])
+                    }
+
+                    else {
+                        return done(null, false,{message:"wrong password"})
+                    }
+                })
+            }
+            else{
+                return done(null,false,{message:"user not found"})
+            }
+        }
+        )
+    }
+));
+
+
+const isAuthenticated = function(req, res, next) {
+    passport.authenticate('myStrategy', function(err, user, info) {
+        if (err) {
+            console.log(err)
+            res.send({message:err})
+        }
+
+        if (!user) {
+           console.log(info.message)//info contains the error message
+        } else {
+
+            console.log("user found")
+            // if user authenticated maintain the session
+        
+        }    
+    })(req, res, next);
+}
+
+app.post('/login',
+    isAuthenticated,
+    function (req, res) {
+        console.log("successful")
+        res.send({message:"login successful"})
+
+        // res.redirect('/');
+    }
+);
+
+
+
+
+
+
+app.listen(9000, () => {
+    console.log("listening to port 9000")
+})
+
+module.exports = { app, config, sql }
