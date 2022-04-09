@@ -3,7 +3,7 @@ import './FromFields.css'
 import Button from '@mui/material/Button';
 
 
-export default function SingleChoiceAllVisible() {
+export default function SingleChoiceAllVisible(props) {
 
   const [optionList, setOptionsList] = useState([])
   const [count, setCount] = useState(1);
@@ -25,8 +25,8 @@ export default function SingleChoiceAllVisible() {
   return (
     <div>
       <div className='form-type container'>
-        <span className='ques_no'>1.</span>
-        <input type="text" className='input-ques' placeholder="Enter Question Text" />
+        <span className='ques_no'>{props.questionNumber}.</span>
+        <input type="text" className='input-ques' placeholder="Enter Question Text" style={{color:props.color}} />
         <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
         {
 

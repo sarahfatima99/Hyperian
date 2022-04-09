@@ -32,7 +32,7 @@ const SingleUploader = (props) => {
 
   return (
     <div className='form-type container'>
-    <span className='ques_no'>1.</span>
+    <span className='ques_no'>{props.questionNumber}.</span>
     <input type="text" className='input-ques' placeholder="Enter Question Text" />
     <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
       <div className="form-group">

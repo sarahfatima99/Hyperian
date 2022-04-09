@@ -10,151 +10,47 @@ import Email from "./FormFieldTypes/Email";
 import TextMultiLine from "./FormFieldTypes/TextMultiLine";
 import Slider from "./FormFieldTypes/Slider";
 import DropDown from "./FormFieldTypes/DropDown";
-import { FaAlipay } from "react-icons/fa";
 import FileUpload from "./FormFieldTypes/FileUpload";
 import Date from "./FormFieldTypes/Date";
 import Ratings from "./FormFieldTypes/Ratings";
 import PictureChoice from "./FormFieldTypes/PictureChoice";
 import YesNo from "./FormFieldTypes/YesNo";
-import NavTabs from "./NavTabs";
-import PhoneCallbackIcon from "@mui/icons-material/PhoneCallback";
-import FormatLineSpacingIcon from '@mui/icons-material/FormatLineSpacing';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import PowerInputOutlinedIcon from '@mui/icons-material/PowerInputOutlined';
-import WebAssetIcon from '@mui/icons-material/WebAsset';
-import EventIcon from '@mui/icons-material/Event';
-import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import PictureInPictureIcon from '@mui/icons-material/PictureInPicture';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import FlakyIcon from '@mui/icons-material/Flaky';
-import GradeIcon from '@mui/icons-material/Grade';
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import StarIcon from '@mui/icons-material/Star';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import DialogSelect from './DialogSelect'
+import {
+  Descriptive, Choice,
+  fileUpload, Contact,
+  General
+} from './dropDownitems'
+import {
+  TabContent, TabPane, Nav,
+  NavItem, NavLink, Row, Col
+} from 'reactstrap';
+import classnames from 'classnames';
 
 const Form = () => {
-  const Descriptive = [
-    {
-      text:"Single Line text",
-      iconName:<PowerInputOutlinedIcon/>,
-    },
-    {
-      text: "Multi Line Text",
-      iconName: <FormatLineSpacingIcon/>,
-    },
-    {
-      text: "Email",
-      iconName: <EmailOutlinedIcon/>,
-    },
-    {
-      text: "Phone",
-      iconName: <PhoneCallbackIcon/>,
-    },
-    {
-      text: "Website",
-      iconName: <WebAssetIcon/>,
-    },
-    {
-      text: "Date",
-      iconName: <EventIcon/>,
-    },
-    
-  
-  ];
 
-  const Choice = [
-    {
-      text:"Multiple Choice",
-      iconName:<SwitchAccountIcon/>,
-    },
-    {
-      text:"Single Choice",
-      iconName:<SwitchAccountIcon/>,
-    },
-    {
-      text:"Drop Down (Single Choice)",
-      iconName:<ArrowDropDownIcon/>,
-    },
-    {
-      text:"Drop Down (Multi Choice)",
-      iconName:<ArrowDropDownCircleIcon/>,
-    },
-    {
-      text:"Picture Choice",
-      iconName:<PictureInPictureIcon/>,
-    },
-    {
-      text:"Slider",
-      iconName:<AdjustIcon/>,
-    },
-    {
-      text:"Yes/No",
-      iconName:<FlakyIcon/>,
-    },
-    {
-      text:"Ratings",
-      iconName:<GradeIcon/>,
-    },
-
-  ];
-
-  const File_Upload = [
-    {
-      text:"Picture Choice",
-      iconName:<PictureInPictureIcon/>,
-    },
-    {
-      text:"File Upload",
-      iconName:<DriveFolderUploadIcon/>,
-    },
-    
-  ];
-  const Contact = [
-    {
-      text:"Email",
-      iconName:<EmailOutlinedIcon/>,
-    },
-    {
-      text:"Phone",
-      iconName:<PhoneCallbackIcon/>,
-    },
-    {
-      text:"Website",
-      iconName:<WebAssetIcon/>,
-    },
-    ];
-  const General = [
-    {
-      text:"Single Line text",
-      iconName:<PowerInputOutlinedIcon/>,
-    },
-    {
-      text:"Multi Line text",
-      iconName:<FormatLineSpacingIcon/>,
-    },
-    {
-      text:"File Upload",
-      iconName:<DriveFolderUploadIcon/>,
-    },
-    {
-      text:"Multiple Choice",
-      iconName:<SwitchAccountIcon/>,
-    },
-  
-  ];
+  // const [characters, updateCharacters] = useState(finalSpaceCharacters);
   const [formType, SetFormType] = useState([]);
-
+  const [currentActiveTab, setCurrentActiveTab] = useState('1');
+  const [background, setBackground] = useState('')
+  const [textcolor, setTextcolor] = useState('')
+  const [ratingEmptyIcon, setRatingEmptyIcon] = useState(<StarIcon fontSize="inherit" />)
+  const [ratingIcon, setRatingIcon] = useState('')
+  const toggle = tab => {
+    if (currentActiveTab !== tab) setCurrentActiveTab(tab);
+  }
   const handleSelect = (e) => {
     if (e == "Single Line text") {
       SetFormType([
         ...formType,
         {
           field_type: e,
-          field_jsx: <SingleLineQues />,
-          color: "pink",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <SingleLineQues questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "pink"
         },
       ]);
     } else if (e == "Multiple Choice") {
@@ -162,9 +58,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <MultichoiceAllVisible />,
-          color: "orange",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <MultichoiceAllVisible questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "orange"
         },
       ]);
     } else if (e == "Phone") {
@@ -172,9 +67,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <Phone />,
-          color: "#8b94d9",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <Phone questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#8b94d9"
         },
       ]);
     } else if (e == "Email") {
@@ -182,9 +76,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <Email />,
-          color: "#bcc466",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <Email questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#bcc466"
         },
       ]);
     } else if (e == "Multi Line Text") {
@@ -192,9 +85,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <TextMultiLine />,
-          color: "yellow",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <TextMultiLine questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "yellow"
         },
       ]);
     } else if (e == "Slider") {
@@ -202,9 +94,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <Slider />,
-          color: "#32a889",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <Slider questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#32a889"
         },
       ]);
     } else if (e == "Drop Down (Single Choice)") {
@@ -212,9 +103,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <DropDown />,
-          color: "#8988a8",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <DropDown questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#8988a8"
         },
       ]);
     } else if (e == "Drop Down (Multi Choice)") {
@@ -222,9 +112,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <DropDown />,
-          color: "#a89888",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <DropDown questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#a89888"
         },
       ]);
     } else if (e == "Picture Choice") {
@@ -232,9 +121,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <PictureChoice />,
-          color: "#b37978",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <PictureChoice questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#b37978"
         },
       ]);
     } else if (e == "Yes/No") {
@@ -242,9 +130,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <YesNo />,
-          color: "#b37899",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <YesNo questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#b37899"
         },
       ]);
     } else if (e == "Ratings") {
@@ -252,9 +139,10 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <Ratings />,
-          color: "#3a4163",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <Ratings questionNumber={formType.length + 1} textcolor={textcolor} ratingicon={ratingIcon} ratingEmptyIcon={ratingEmptyIcon} />,
+          color: "#dd99ff"
+
+
         },
       ]);
     } else if (e == "File Upload") {
@@ -262,9 +150,8 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <FileUpload />,
-          color: "#523a63",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <FileUpload questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#523a63"
         },
       ]);
     } else if (e == "Date") {
@@ -272,13 +159,31 @@ const Form = () => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <Date />,
-          color: "#69384b",
-          icon: "PhoneCallbackIcon",
+          field_jsx: <Date questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#b3ffb3"
+
         },
       ]);
     }
   };
+
+  const handleOnDragEnd = (result) => {
+    console.log(result)
+    const items = Array.from(formType);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    SetFormType(items);
+    console.log(formType)
+  }
+
+  const handleRatingChange = (e) => {
+    console.log(e.target.value)
+    if (e.target.value == 'heart') {
+      setRatingIcon(<FavoriteIcon fontSize="inherit" />)
+      setRatingEmptyIcon(<FavoriteBorderIcon fontSize="inherit" />)
+    }
+  }
+
   const removeItem = (id) => {
     let newArray = [...formType];
 
@@ -310,9 +215,10 @@ const Form = () => {
         <div className="row">
           <div className="col-lg-9" style={{ paddingLeft: "0" }}>
             <Tabs>
-              <div className="row forms-views ">
-                <div className="column side-panel">
-                  <div className="tools-side-bar">
+              <div className="row forms-views " >
+
+                <div className="column form-area" style={{ height: "700px" }}>
+                  <div className=" side-panel tools-side-bar">
                     <div className="add-button">
                       <DropdownButton
                         key="end"
@@ -328,14 +234,13 @@ const Form = () => {
                                 Descriptive Fields
                               </h1>
                               {Descriptive.map((item) => {
-                                  
+
                                 return (
                                   <Dropdown.Item
                                     className="drop-down-item-row1"
-                                    
                                     eventKey={item.text}
                                   >
-                                    <div style={{gap:"5px"}} className="d-flex flex-row align-items-center space-around-between">
+                                    <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
                                       <div>{item.iconName}</div>
                                       <div>{item.text}</div>
                                     </div>
@@ -352,7 +257,7 @@ const Form = () => {
                                     style={{ backgroundColor: item.color }}
                                     eventKey={item.text}
                                   >
-                                   <div style={{gap:"5px"}} className="d-flex flex-row align-items-center space-around-between">
+                                    <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
                                       <div>{item.iconName}</div>
                                       <div>{item.text}</div>
                                     </div>
@@ -362,14 +267,14 @@ const Form = () => {
                             </div>
                             <div className="column">
                               <h1 className="headings upload">Upload</h1>
-                              {File_Upload.map((item) => {
+                              {fileUpload.map((item) => {
                                 return (
                                   <Dropdown.Item
                                     className="drop-down-item-row1"
                                     style={{ backgroundColor: item.color }}
                                     eventKey={item.text}
                                   >
-                                 <div style={{gap:"5px"}} className="d-flex flex-row align-items-center space-around-between">
+                                    <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
                                       <div>{item.iconName}</div>
                                       <div>{item.text}</div>
                                     </div>
@@ -387,7 +292,7 @@ const Form = () => {
                                     style={{ backgroundColor: item.color }}
                                     eventKey={item.text}
                                   >
-                                    <div style={{gap:"5px"}} className="d-flex flex-row align-items-center space-around-between">
+                                    <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
                                       <div>{item.iconName}</div>
                                       <div>{item.text}</div>
                                     </div>
@@ -400,7 +305,7 @@ const Form = () => {
                               {Contact.map((item) => {
                                 return (
                                   <Dropdown.Item eventKey={item.text}>
-                                    <div style={{gap:"5px"}} className="d-flex flex-row align-items-center space-around-between">
+                                    <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
                                       <div>{item.iconName}</div>
                                       <div>{item.text}</div>
                                     </div>
@@ -412,44 +317,71 @@ const Form = () => {
                         </div>
                       </DropdownButton>
                     </div>
-                    <div className="column">
-                      <TabList>
-                        <div className="Tab-list">
-                          {formType.map((item, key) => {
-                            return (
-                              <>
-                                <Tab>
-                                  <div
-                                    className="side-bar-content d-flex flex-row align-items-center justify-content-between"
-                                    style={{ backgroundColor: item.color }}
-                                  >
-                                    <h2 >
-                                      {key + 1}. 
-                                      <span className="feild-name-hover">
-                                        {item.field_type}
-                                      </span>
-                                    </h2>
-                                    <div>
-                                      <i
-                                        onClick={() => {
-                                          removeItem(key);
-                                        }}
-                                      
-                                        class="fa fa-trash"
-                                        aria-hidden="true"
-                                      ></i>
-                                    </div>
-                                  </div>
-                                </Tab>
-                              </>
-                            );
-                          })}
-                        </div>
-                      </TabList>
-                    </div>
+                    <TabList>
+                      <DragDropContext onDragEnd={handleOnDragEnd}>
+                        <Droppable droppableId="Tab-list">
+                          {
+                            (provided) => (
+                              <div className="Tab-list"
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}>
+                                {formType.map((item, key) => {
+                                  return (
+                                    <>
+                                      <Draggable
+                                        key={key}
+                                        draggableId={"draggable-" + key}
+                                        index={key}
+                                      >
+                                        {(provided) => (
+                                          <div ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}>
+                                            <Tab>
+                                              <div
+                                                className="side-bar-content d-flex flex-row align-items-center justify-content-between"
+                                                style={{ backgroundColor: item.color }}
+                                                onClick={() => {
+                                                  console.log(provided.innerRef)
+                                                }}
+                                              >
+                                                <h2 >
+                                                  {key + 1}.
+                                                  <span style={{ marginLeft: "12px" }}>
+                                                    {item.field_type}
+                                                  </span>
+                                                </h2>
+                                                <div>
+                                                  <i
+                                                    onClick={() => {
+                                                      removeItem(key);
+                                                    }}
+
+                                                    class="fa fa-trash"
+                                                    aria-hidden="true"
+                                                  ></i>
+                                                </div>
+                                              </div>
+
+                                            </Tab>
+                                          </div>
+                                        )}
+                                      </Draggable>
+
+                                    </>
+                                  );
+                                })}
+                                {provided.placeholder}
+                              </div>)}
+                        </Droppable>
+                      </DragDropContext>
+                    </TabList>
                   </div>
+
                 </div>
-                <div className="column form-area">
+
+                <div className={`column form-content ${background}`}>
+
                   {formType.map((item, key) => {
                     return (
                       <TabPanel>
@@ -463,9 +395,122 @@ const Form = () => {
               </div>
             </Tabs>
           </div>
-          <div className=" col-lg-3">
+
+          <div className="col-lg-3" style={{ height: "700px" }}>
             <div className="logic-design-side-bar">
-              <NavTabs />
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({
+                      active:
+                        currentActiveTab === '1'
+                    },
+                      'tab-nav-link ')}
+                    onClick={() => { toggle('1'); }}
+                  >
+                    Themes
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({
+                      active:
+                        currentActiveTab === '2'
+                    }, 'tab-nav-link ')}
+                    onClick={() => { toggle('2'); }}
+                  >
+
+                    Design
+                  </NavLink>
+                </NavItem>
+
+              </Nav>
+              <TabContent activeTab={currentActiveTab}>
+                <TabPane tabId="1">
+                  <Row>
+                    <Col sm="12">
+                      <ul>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('basic')
+                            }
+                          } >
+                            basic
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('plainblue')
+                            }
+                          }>
+                            plain blue
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('pink')
+                            }
+                          }>
+                            pink
+                          </button >
+                        </li>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('orange')
+                            }
+                          }>
+                            orange
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('nightscape')
+                            }
+                          }>
+                            night scape
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={
+                            () => {
+                              setBackground('abstract')
+                            }
+                          }>
+                            abtstract
+                          </button>
+                        </li>
+                        <li>
+                          <button>
+                            fractal
+                          </button>
+                        </li>
+                      </ul>
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                  <Row>
+                    <Col sm="12">
+                      <label for="cars">Choose rating type:</label>
+
+                      <select name="starts" id="rating" onChange={e => handleRatingChange(e)}>
+                        <option value="select">select</option>
+                        <option value="heart">heart</option>
+                        <option value="saab">faces</option>
+                        <option value="mercedes">world</option>
+                        <option value="audi">Audi</option>
+                      </select>
+
+                    </Col>
+                  </Row>
+                </TabPane>
+              </TabContent>
+
             </div>
           </div>
         </div>

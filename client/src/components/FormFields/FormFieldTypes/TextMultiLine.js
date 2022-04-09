@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 
 
 
-export default function TextMultiLine() {
+export default function TextMultiLine(props) {
     return (
         <div>
             <div className='form-type container'>
-                <span className='ques_no'>1.</span>
+                <span className='ques_no'>{props.questionNumber}.</span>
                 <input type="text" className='input-ques' placeholder="Enter Question Text" />
                 <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
                 <input type="textarea" disabled className='ans-disabled' placeholder="Type your answer" />

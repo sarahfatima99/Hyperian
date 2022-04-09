@@ -4,16 +4,29 @@
 }
 
 .tools-side-bar{
-    height: 1090px;    
-    
+    height: 700px;    
+  
     border-right:2px solid rgba(240, 230, 230, 0.76);
   
 }
+
+.tools-side-bar{
+    overflow-y: scroll; 
+
+}
+
+.panel-content{
+    overflow-y: scroll; 
+}
+
+.tools-side-bar::-webkit-scrollbar {
+    display: none;
+  }
 .logic-design-side-bar{
   
 
     border-top:2px solid rgba(240, 230, 230, 0.76);
-    height: 1090px;
+    height: 700px;
     border-left:2px solid rgba(221, 210, 210, 0.76);
 }
 
@@ -49,12 +62,13 @@
 .Tab-list{
    
     padding: 0px 10px;
+  
 }
 
   .side-bar-content{
       cursor: pointer;
       font-size:20px;
-      /* background-color: rgb(14, 114, 92); */
+
       margin-top: 20px;
       margin-left: 20px;  
       text-align: center;    
@@ -62,10 +76,6 @@
       padding: 10px 6px ;
   }
 
-  .column.side-panel    {
-
-      width: 30%;
-  }
 
   .column.panel-content{
       width: 70%;
@@ -88,6 +98,11 @@ button#dropdown-button-drop-end.dropdown-toggle.btn.btn-primary::after{
 
 }
 
+.column.form-area{
+    width:30%;
+    padding-right: 15px;
+  }
+
 .dropdown-toggle.btn.btn-primary{
     border-color:  rgb(118, 202, 139);;
     background-color: rgb(118, 202, 139);
@@ -99,19 +114,38 @@ button#dropdown-button-drop-end.dropdown-toggle.btn.btn-primary::after{
 }
 
 a.tab-nav-link.nav-link{
-    padding-left: 70px;
+
     border-top: 0px;
    
- 
+    padding-left: 55px;
     /* padding-top: 0px; */
-   
+   text-align: center;
     font-size: 20px;
     padding-right: 68px;
 }
 
+a.tab-nav-link.nav-link.design{
+    padding-left: 55px;
+
+}
+a.tab-nav-link.nav-link.back-ground{
+  padding-left: 10px;
+    
+}
 a.tab-nav-link.nav-link.active{
       background-color: rgb(118, 202, 139);
 
+}
+
+.column.form-content{
+width: 69%;
+height: 600px;
+margin-top: 80px;
+
+border-bottom-left-radius: 18px;
+border-top-left-radius: 18px;
+border-top-right-radius: 18px;
+border-bottom-right-radius: 18px;
 }
 
 .tab-nav-link{
@@ -194,8 +228,42 @@ div.MuiDialogTitle-root{
 }
 
 
+
 .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
 width: 50%;
 
 
+}
+
+.plainblue{
+    background-image: url('./backgroundImages/plain\ blue.png');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+}
+
+.abstract{
+    background-image: url('./backgroundImages/abstract.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+}
+
+.nightscape{
+    background-image: url('./backgroundImages/nighscape.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+}
+.orange{
+    background-image: url('./backgroundImages/orange.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+}
+.pink{
+    background-image: url('./backgroundImages/pink.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+}
+.basic{
+    background-image: url('./backgroundImages/basic.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px
 }

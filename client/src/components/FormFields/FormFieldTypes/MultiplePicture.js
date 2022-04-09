@@ -26,19 +26,7 @@ const MultiUploader = (props) => {
       }
       reader.readAsDataURL(e.target.files[0])
         
-        // let formData = new FormData();
-        // _.forEach(files, file => {
-        //     formData.append('files', file);
-        // });
-        
 
-       
-        // let { data } = await API.post(uploadUrl, formData, {
-        //     onUploadProgress: ({ loaded, total }) => {
-        //         let progress = ((loaded / total) * 100).toFixed(2);
-        //         setProgress(progress);
-        //     }
-        // });
         
         
         

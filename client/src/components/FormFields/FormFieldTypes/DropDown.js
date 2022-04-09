@@ -3,7 +3,7 @@ import './FromFields.css'
 import Button from '@mui/material/Button';
 
 
-export default function DropDown() {
+export default function DropDown(props) {
 
     const [optionList,setOptionsList]=useState([])
     const [count, setCount] = useState(1);
@@ -27,9 +27,10 @@ export default function DropDown() {
   return (
     <div>            
         <div className='form-type container'>
-        <span className='ques_no'>1.</span>
+        <span className='ques_no'>{props.questionNumber}.</span>
         <input type="text" className='input-ques' placeholder="Enter Question Text" />
         <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
+        <br/>
        {        
         
           optionList.map((item, key) => {
