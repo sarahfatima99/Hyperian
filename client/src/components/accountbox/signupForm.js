@@ -84,21 +84,6 @@ const  SignupForm=()=> {
           Signin
         </BoldLink>
       </MutedLink>
-      <Or>---- OR ----</Or>
-      <Socialmedia>
-        <Googlelogin>
-          <login_a_tag>
-            <Google_banner></Google_banner>
-            <Span_text>Sign up with Google</Span_text>
-          </login_a_tag>
-        </Googlelogin>
-        <Googlelogin>
-          <login_a_tag>
-            <Facebook_banner></Facebook_banner>
-            <Span_text>Sign up with Facebook</Span_text>
-          </login_a_tag>
-        </Googlelogin>
-      </Socialmedia>
     </BoxContainer>
   );
 }

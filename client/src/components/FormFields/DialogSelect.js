@@ -11,6 +11,7 @@ import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Dialogmodal from 'components/Dialogmodal';
 
 const styles = theme => ({
   container: {
@@ -50,85 +51,30 @@ class DialogSelect extends React.Component {
       <div>
         <Button onClick={this.handleClickOpen}>Apply conditonal logic</Button>
         <Dialog
+          sx={{
+            width: 500,
+            color: 'success.main',
+          }}
           disableBackdropClick
           disableEscapeKeyDown
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle>Branching and Conditons</DialogTitle>
+          <div><DialogTitle style={{marginBottom:'10px'}}>Branching and Conditons</DialogTitle>
           <h4 className='control'>Take full control of the flow</h4>
-          <DialogContent>
-            <form className={classes.container}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select 
-                  native
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-native-simple" />}
-                >
-                  <option value="" />
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
-                </Select>
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-simple">Age</InputLabel>
-                <Select
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-simple" />}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </form>
-            <form className={classes.container}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select
-                  native
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-native-simple" />}
-                >
-                  <option value="" />
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
-                </Select>
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-simple">Age</InputLabel>
-                <Select
-                  value={this.state.age}
-                  onChange={this.handleChange('age')}
-                  input={<Input id="age-simple" />}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </form>
+          </div>
+          <DialogContent style={{backgroundColor:'inherit'}}>
+            <Dialogmodal></Dialogmodal>
           
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button style={{Colour:'Black'}} onClick={this.handleClose} color="inherit">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Ok
+            <Button onClick={this.handleClose} color="Black">
+              Save
             </Button>
+            
           </DialogActions>
         </Dialog>
       </div>

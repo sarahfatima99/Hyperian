@@ -2,9 +2,10 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Typical from 'react-typical';
-
+import AccountBox from "components/accountbox";
 import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../headers/light";
 import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
+import { render } from "@testing-library/react";
 
 
 const StyledHeader = styled(Header)`
@@ -47,7 +48,11 @@ const StyledResponsiveVideoEmbed = styled(ResponsiveVideoEmbed)`
     ${tw`rounded bg-black shadow-xl`}
   }
 `;
-
+function displaylogin(){
+  return
+    <AccountBox/>
+  
+}
 export default () => {
   const navLinks = [
     <NavLinks key={1}>
@@ -64,14 +69,19 @@ export default () => {
         AboutUs
       </NavLink>
     </NavLinks>,
-    <NavLink  >
-      <PrimaryLink  href="/signup">
-        Log in
+    <NavLinks>    
+      <NavLink  >
+      <PrimaryLink href="/login">
+         Login
       </PrimaryLink>
-      <PrimaryLink style={{marginLeft:"10px"}}  href="/createform">
+    </NavLink>
+      <NavLink  >
+      <PrimaryLink href="/createform">
          Create Form
       </PrimaryLink>
     </NavLink>
+    </NavLinks>
+
   ];
 
   return (
