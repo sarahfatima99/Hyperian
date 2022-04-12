@@ -1,144 +1,91 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
 import tw from "twin.macro";
 import styled from "styled-components";
+import { css } from "styled-components/macro";
 import { SectionHeading } from "../misc/Headings";
+import defaultCardImage from "../../images/shield-icon.svg";
 import { PrimaryButton as PrimaryButtonBase } from "../misc/Buttons";
-
-// import { ReactComponent as LocationIcon } from "feather-icons/dist/icons/map-pin.svg";
-// import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as ChevronLeftIcon } from "feather-icons/dist/icons/chevron-left.svg";
 import { ReactComponent as ChevronRightIcon } from "feather-icons/dist/icons/chevron-right.svg";
+import SupportIconImage from "../../images/support-icon.svg";
+import ShieldIconImage from "../../images/shield-icon.svg";
+import CustomizeIconImage from "../../images/customize-icon.svg";
+import FastIconImage from "../../images/fast-icon.svg";
+import ReliableIconImage from "../../images/reliable-icon.svg";
+import SimpleIconImage from "../../images/simple-icon.svg";
 
 const Container = tw.div`relative`;
-const Content = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20`;
 
-const HeadingWithControl = tw.div`flex flex-col items-center sm:items-stretch sm:flex-row justify-between`;
-const Heading = tw(SectionHeading)``;
-const Controls = tw.div`flex items-center`;
-const ControlButton = styled(PrimaryButtonBase)`
-  ${tw`mt-4 sm:mt-0 first:ml-0 ml-6 rounded-full p-2`}
-  svg {
-    ${tw`w-6 h-6`}
-  }
+const ThreeColumnContainer = styled.div`
+  ${tw`flex flex-col items-center md:items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-xl mx-auto py-20 md:py-24`}
 `;
-const PrevButton = tw(ControlButton)``;
-const NextButton = tw(ControlButton)``;
+const Heading = tw(SectionHeading)`w-full`;
 
-const CardSlider = styled(Slider)`
-  ${tw`mt-16`}
-  .slick-track { 
-    ${tw`flex`}
-  }
-  .slick-slide {
-    ${tw`h-auto flex justify-center mb-1`}
-  }
+const Column = styled.div`
+  ${tw`md:w-1/2 lg:w-1/3 px-6 flex`}
 `;
-const Card = tw.div`h-full flex! flex-col sm:border max-w-sm sm:rounded-tl-3xl sm:rounded-br-3xl relative focus:outline-none`;
-const CardImage = styled.div(props => [
-  `background-image: url("${props.imageSrc}");`,
-  tw`w-full h-56 sm:h-64 bg-cover bg-center rounded sm:rounded-none sm:rounded-tl-3xl`
-]);
 
-const TextInfo = tw.div`py-6 sm:px-10 sm:py-6 text-gray-900`;
-const TitleReviewContainer = tw.div`flex flex-col sm:flex-row sm:justify-between sm:items-center`;
-const Title = tw.h5`text-2xl font-bold`;
+const Card = styled.div`
+  ${tw`flex flex-col mx-auto max-w-xs items-center px-6 py-10 border-2 border-dashed border-green-700 rounded-lg mt-12`}
+  .imageContainer {
+    ${tw`border-2 border-green-600 text-center rounded-full p-6 flex-shrink-0 relative`}
+    img {
+      ${tw`w-8 h-8`}
+    }
+  }
 
-const RatingsInfo = styled.div`
-  ${tw`flex items-center sm:ml-4 mt-2 sm:mt-0`}
-  svg {
-    ${tw`w-6 h-6 text-yellow-500 fill-current`}
+  .textContainer {
+    ${tw`mt-6 text-center`}
+  }
+
+  .title {
+    ${tw`mt-2 font-bold text-xl leading-none text-green-500`}
+  }
+
+  .description {
+    ${tw`mt-3 font-semibold text-secondary-100 text-sm leading-loose`}
   }
 `;
 
-
-const Description = tw.p`text-sm leading-loose mt-2 sm:mt-4`;
-
-const IconContainer = styled.div`
-  ${tw`inline-block rounded-full p-2 bg-blue-700 text-gray-100`}
-  svg {
-    ${tw`w-3 h-3`}
-  }
-`;
-const Text = tw.div`ml-2 text-sm font-semibold text-gray-800`;
 
 
 export default () => {
-  
-  const [sliderRef, setSliderRef] = useState(null);
-  const sliderSettings = {
-    arrows: false,
-    slidesToShow: 3,
-    responsive: [
-      {
-        breakpoint: 1280,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
+ 
 
-      {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 1,
-        }
-      },
-    ]
-  };
-
-  
   const cards = [
     {
-      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbeeojCgi0bKvqTIZcHsis-It_fpbOaxBnIkYnUHa2Ppmlwc-EhZPlsStP4RRQ54uU31g&usqp=CAU",
-      title: "Survey Templates",
-      description: "Surveys templates for customer satisfaction, Event surveys, HR surveys, Market research, employee engagment.",
-     
+      imageSrc: ShieldIconImage,
+      title: "Market Research Template",
+      description: "We create and manage ads that you need, from creation to deployment. Lorem ipsum donor sit amet consicou."
     },
-    {
-      imageSrc: "https://www.freepik.com/free-vector/quiz-neon-sign_4553888.htm#page=1&query=quiz%20templates&position=2&from_view=search",
-      title: "Quiz Templates",
-      description: "Quiz templates for multiple choice quiz,spelling quiz, math quiz, vocabulary quiz, science quiz .",
-     
-    },
-    {
-      imageSrc: "https://www.freepik.com/free-vector/flat-giving-reviews-concept_14449319.htm#page=1&query=reviews%20templates&position=17&from_view=search",
-      title: "Reviews Templates",
-      description: "Review templates for online order reviews, remote working experience, product reviews, customer feedback.",
-  
-    },
-    {
-      imageSrc: "https://www.freepik.com/free-photo/english-teachers-doing-class-together_15678314.htm#page=1&query=online%20learning&position=9&from_view=search",
-      title: "online learning Templates",
-      description: "Templates for course evalution, students feedback, course feedback, online registration forms.",
- 
-    },
-  ]
+    { imageSrc: SupportIconImage, title: "Research survey" },
+    { imageSrc: CustomizeIconImage, title: "Quiz Templates" },
+    { imageSrc: ShieldIconImage, title: "Recommandation Templates" },
+    { imageSrc: SupportIconImage, title: "Reviews Templates" },
+    { imageSrc: CustomizeIconImage, title: "Registration Template" }
+  ];
 
   return (
     <Container>
-      <Content>
-        <HeadingWithControl>
-          <Heading>Templates</Heading>
-          <Controls>
-            <PrevButton onClick={sliderRef?.slickPrev}><ChevronLeftIcon/></PrevButton>
-            <NextButton onClick={sliderRef?.slickNext}><ChevronRightIcon/></NextButton>
-          </Controls>
-        </HeadingWithControl>
-        <CardSlider ref={setSliderRef} {...sliderSettings}>
-          {cards.map((card, index) => (
-            <Card key={index}>
-              <CardImage imageSrc={card.imageSrc} />
-              <TextInfo>
-                <TitleReviewContainer>
-                  <Title>{card.title}</Title>
-                </TitleReviewContainer>
-                
-                <Description>{card.description}</Description>
-              </TextInfo>
+      <ThreeColumnContainer>
+        <Heading>Our Offered <span tw="text-green-500">Templates</span></Heading>
+        {cards.map((card, i) => (
+          <Column key={i}>
+            <Card>
+              <span className="imageContainer">
+                <img src={card.imageSrc || defaultCardImage} alt="" />
+              </span>
+              <span className="textContainer">
+                <span className="title">{card.title || "Fully Secure"}</span>
+                <p className="description" style={{width:"100%",textAlign:"center",marginLeft:"0%"}}>
+                  {card.description || "Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel."}
+                </p>
+              </span>
             </Card>
-          ))}
-        </CardSlider>
-      </Content>
+          </Column>
+        ))}
+      </ThreeColumnContainer>
+      
     </Container>
   );
 };
