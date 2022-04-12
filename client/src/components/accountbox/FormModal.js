@@ -3,7 +3,6 @@ import {MdClose} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import {useSpring,animated } from "react-spring";
 import styled from "styled-components";
-// import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./FormModal.js";
 
 
@@ -39,22 +38,22 @@ padding:0;
 z-index:200;
 `
 
-const FormModal = ({showCreateModal,setShowCreateModal}) =>{
+const FormModal = ({showModal,setShowModal}) =>{
 
     const animation = useSpring({
         config: {
             duration: 250
         },
-        opacity: showCreateModal ? 1 : 0,
-        transform: showCreateModal ? `translateY(0%)` : `translateY(-100%)`
+        opacity: showModal ? 1 : 0,
+        transform: showModal ? `translateY(0%)` : `translateY(-100%)`
     });
 
   return (
     <>
-    {showCreateModal ? (
+    {showModal ? (
         <Background>
             <animated.div style={animation}>
-        <ModalWrapper showCreateModal={showCreateModal}>
+        <ModalWrapper showModal={showModal}>
             <div className='container mt-5'>
                 <div className='row'>
                     <h5>Add Title</h5>
@@ -66,7 +65,7 @@ const FormModal = ({showCreateModal,setShowCreateModal}) =>{
                     </div>
                 </div>
             </div>
-        <CloseModalButton aria-label='Close Modal' onClick={() =>{ setShowCreateModal(prev => !prev)}}/>
+        <CloseModalButton aria-label='Close Modal' onClick={() =>{ setShowModal(prev => !prev)}}/>
         </ModalWrapper>
         </animated.div>
     </Background>
