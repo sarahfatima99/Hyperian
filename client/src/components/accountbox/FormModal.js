@@ -7,11 +7,13 @@ import "./FormModal.js";
 
 
 const Background = styled.div`
-width: 100%;
-height:100%;
+width: 120%;
+height:120%;
 background:rgba(0,0,0,0.8);
 position:fixed;
 display:flex;
+left:-150px;
+top:-150px;
 justify-content:center;
 align-items:center;
 z-index:200;
@@ -55,15 +57,30 @@ const FormModal = ({showModal,setShowModal}) =>{
             <animated.div style={animation}>
         <ModalWrapper showModal={showModal}>
             <div className='container mt-5'>
-                <div className='row'>
-                    <h5>Add Title</h5>
-                    <input className='title-input'/>
-                    <h5 style={{marginTop:"2px"}}>Add Description <p style={{fontSize:"12px" , color:"gray"}}>(optional)</p></h5>
-                    <input className='title-input'></input>
-                    <div className='container mt-4 text-align-center'>
-                    <NavLink to="/createform"><button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}}>Create</button></NavLink>
+                <div className='row d-flex flex-row'>
+                    <div className='col-lg-6'>
+                        <h5>Add Title</h5>
+                    </div>
+                    <div className='col-lg-6'>
+                        <h5 style={{marginTop:"0px"}}>Add Description <p style={{fontSize:"12px" , color:"gray"}}>(optional)</p></h5>
+                    </div>
+                    {/* <input className='title-input'/>
+                    
+                     */}
+                </div>
+                <div className='container'>
+                    <div className='row d-flex flex-row'>
+                        <div style={{paddingLeft:"0px"}} className='col-lg-6'>
+                            <input style={{paddingLeft:"0px",borderBottom:"2px solid #39cc83 "}} className='title-input'/>
+                        </div>
+                        <div className='col-lg-6'>
+                            <input style={{borderBottom:"2px solid #39cc83 "}} className='title-input'></input>
+                        </div>
                     </div>
                 </div>
+                <div className='container mt-4 text-align-center'>
+                    <NavLink to="/createform"><button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}}>Create</button></NavLink>
+                    </div>
             </div>
         <CloseModalButton aria-label='Close Modal' onClick={() =>{ setShowModal(prev => !prev)}}/>
         </ModalWrapper>
