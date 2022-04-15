@@ -75,11 +75,6 @@ export default () => {
          Login
       </PrimaryLink>
     </NavLink>
-      <NavLink  >
-      <PrimaryLink href="/createform">
-         Create Form
-      </PrimaryLink>
-    </NavLink>
     </NavLinks>
 
   ];

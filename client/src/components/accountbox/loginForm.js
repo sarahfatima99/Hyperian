@@ -61,7 +61,7 @@ const LoginForm = () => {
     console.log(response)
     )
 
-    navigate('/')
+    navigate('/createform')
   }
 
   const login = () => {

@@ -3,8 +3,7 @@ import {MdClose} from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import {useSpring,animated } from "react-spring";
 import styled from "styled-components";
-// import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./FormModal.js";
+
 
 
 const Background = styled.div`
@@ -58,11 +57,14 @@ const FormModal = ({showCreateModal,setShowCreateModal}) =>{
             <div className='container mt-5'>
                 <div className='row'>
                     <h5>Add Title</h5>
+                    <br/>
+            
                     <input className='title-input'/>
                     <h5 style={{marginTop:"2px"}}>Add Description <p style={{fontSize:"12px" , color:"gray"}}>(optional)</p></h5>
+                  <br/>
                     <input className='title-input'></input>
                     <div className='container mt-4 text-align-center'>
-                    <NavLink to="/createform"><button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}}>Create</button></NavLink>
+                    <NavLink to="/formpage"><button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}}>Create</button></NavLink>
                     </div>
                 </div>
             </div>

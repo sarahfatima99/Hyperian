@@ -5,16 +5,13 @@ import  AccountBox  from 'components/accountbox';
 import {  Route, Routes, Router } from 'react-router-dom';
 import Form from "components/FormFields/Form";
 import Home from 'components/Home'
-import MultichoiceAllVisible from "components/FormFields/FormFieldTypes/MultichoiceAllVisible";
-import SingleLineQues from "components/FormFields/FormFieldTypes/SingleLineQues";
 import ErrorPage from "Pages/ErrorPages/ErrorPage";
 import ViewForm from "Pages/ViewForm/ViewForm";
 import Workspace from "Pages/Workspace/Workspace";
 import Response from "Pages/Response/Response";
-
+import FormModal from 'components/FormFields/FormModal'
 const App = () => {
   return (<>
-
     <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/login" element={<AccountBox/>} />
