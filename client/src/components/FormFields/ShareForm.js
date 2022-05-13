@@ -13,26 +13,28 @@ const ShareForm = ({data}) => {
 
     const shareHandle = () =>{
       
-      console.log(formQues)
-      data['Pages'].map((item) =>{
+      
+      data['Pages'].map((item) => {
         
-       console.log(item)
-        if(item.elements[0]['name'] === 'Single Line text')
+       
+        if(item.elements[0]['name'] == 'Single Line text')
         {
-          SetFormQues([...formQues,"Single Line Text"]);
+          
+          SetFormQues([...formQues,{field_jsx: <SingleLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']}/>}]);
           
         }
-        else if(item.elements[0]['name'] === 'Multi Line Text')
+        else if(item.elements[0]['name'] == 'Multi Line Text')
         {
+          
           
           SetFormQues([...formQues,{field_jsx: <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']}/> }])
           
         }
-        else if(item.elements[0]['name'] === "Email")
+        else if(item.elements[0]['name'] == "Email")
         {
-          console.log(formQues)
+          console.log("Email")
+          
           SetFormQues([...formQues,"Emailll" ])
-          console.log(formQues)
           
         }
         
@@ -43,12 +45,43 @@ const ShareForm = ({data}) => {
   return (
     <>
     <button onClick={shareHandle}>Preview</button>
-    <div>{formQues.map((item,key)=>{
-      console.log(formQues)
+    {/* {formQues.map((item,key)=>{
+      
+     console.log(item)
       return(<>
-      {item}
+      {item.field_jsx}
       </>)
-    })}</div>
+    })} */}
+
+    {data['Pages'].map((item) =>{
+      console.log(item)
+      if(item.elements[0]['name']=== "Single Line text")
+      {
+        return(<>
+        <div>
+        <SingleLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']}/>
+        </div>
+        </>)
+        
+
+      }
+      else if(item.elements[0]['name']=== "Multi Line Text")
+      {
+        return(<>
+        <div>
+          <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']}/>
+          </div>
+          </>)
+        
+      }
+      else if(item.elements[0]['name']=== "Email")
+      {
+        return(<>
+        <div>
+          <EmailQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']}/>
+          </div></>)
+      }
+    })}
    
     </>
   )
