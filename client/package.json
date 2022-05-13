@@ -48,6 +48,7 @@
     "reactstrap": "^9.0.1",
     "recharts": "^2.1.9",
     "styled-components": "^5.3.3",
+    "survey-creator-react": "^1.9.24",
     "tailwindcss": "^2.2.19",
     "twin.macro": "^2.8.1",
     "web-vitals": "^1.1.2"

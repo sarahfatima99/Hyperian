@@ -1,4 +1,4 @@
-import Navbar from 'components/Navbar/Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 import React from 'react';
 import polygon from "../../images/Polygon.png";
 import { useState } from 'react';

@@ -3,23 +3,30 @@ import './FromFields.css'
 import Button from '@mui/material/Button';
 
 
-export default function MultichoiceAllVisible(props) {
+export default function MultichoiceAllVisible({questionNumber , onQuestionTitleChange,onQuestionDescriptionChange, onOptionListChange}) {
 
     const [optionList,setOptionsList]=useState([])
     const [count, setCount] = useState(1);
+
+    const Questionvalue = (e) =>{
+        
+      onQuestionTitleChange(e.target.value);
+
+  }
+
+  const Descriptionvalue = (e) => {
+      
+      onQuestionDescriptionChange(e.target.value);
+  }
 
     const handleKeyDown=(e)=>
     {    
         if (e.key == 'Enter')
          {
             setCount(prevCount => prevCount + 1)  
-            setOptionsList([...optionList,
-                        {
-
-                           name: e.target.value
-                        }])            
+            setOptionsList([...optionList,{choice: e.target.value}])
+                        onOptionListChange(optionList);            
                         e.target.value = ""
-                        console.log(optionList) 
                         
           }
      }
@@ -27,16 +34,16 @@ export default function MultichoiceAllVisible(props) {
   return (
     <div>            
         <div className='form-type container'>
-        <span className='ques_no'>{props.questionNumber}</span>
-        <input type="text" className='input-ques' placeholder="Enter Question Text" />
-        <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
+        <span className='ques_no'>{questionNumber}</span>
+        <input type="text" className='input-ques' placeholder="Enter Question Text" onChange={Questionvalue} />
+        <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" onChange={Descriptionvalue} />
       <br/>
        {        
         
           optionList.map((item, key) => {
             return (
                 <div>                                
-                  <input type="textarea"  className=" multi-choice add-option"    placeholder={item.name} onKeyDown={handleKeyDown} />                               
+                  <input type="textarea"  className=" multi-choice add-option"    placeholder={item.choice} onKeyDown={handleKeyDown} />                               
                 </div>
                 )
                 })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Form from 'components/FormFields/Form';
+import Form from '../../components/FormFields/Form';
 
 export const Workspace = () => {
   return (
