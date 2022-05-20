@@ -12,13 +12,20 @@ import Slider from "./FormFieldTypes/Slider";
 import DropDown from "./FormFieldTypes/DropDown";
 import FileUpload from "./FormFieldTypes/FileUpload";
 import Date from "./FormFieldTypes/Date";
+import Website from './FormFieldTypes/Website'
 import Ratings from "./FormFieldTypes/Ratings";
 import PictureChoice from "./FormFieldTypes/PictureChoice";
 import YesNo from "./FormFieldTypes/YesNo";
+import SingleChoiceAllVisible from './FormFieldTypes/SingleChoiceAllVisible'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarIcon from '@mui/icons-material/Star';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+import {
+  DragDropContext
+  , Droppable,
+  Draggable
+} from 'react-beautiful-dnd';
 import DialogSelect from './DialogSelect'
 import {
   Descriptive, Choice,
@@ -30,6 +37,7 @@ import {
   NavItem, NavLink, Row, Col
 } from 'reactstrap';
 import classnames from 'classnames';
+import SingleUploader from "./FormFieldTypes/PictureChoice";
 
 const Form = () => {
 
@@ -40,6 +48,7 @@ const Form = () => {
   const [textcolor, setTextcolor] = useState('')
   const [ratingEmptyIcon, setRatingEmptyIcon] = useState(<StarIcon fontSize="inherit" />)
   const [ratingIcon, setRatingIcon] = useState('')
+  const [showType,setShowType]=useState('')
   const toggle = tab => {
     if (currentActiveTab !== tab) setCurrentActiveTab(tab);
   }
@@ -62,7 +71,28 @@ const Form = () => {
           color: "orange"
         },
       ]);
-    } else if (e == "Phone") {
+    }
+    else if (e == "SingleChoiceAllVisible") {
+      SetFormType([
+        ...formType,
+        {
+          field_type: e,
+          field_jsx: <SingleChoiceAllVisible questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#E6D5B8"
+        },
+      ]);
+    }
+    else if (e == "Website") {
+      SetFormType([
+        ...formType,
+        {
+          field_type: e,
+          field_jsx: <Website questionNumber={formType.length + 1} textcolor={textcolor} />,
+          color: "#DEB6AB"
+        },
+      ]);
+    }
+    else if (e == "Phone") {
       SetFormType([
         ...formType,
         {
@@ -165,6 +195,7 @@ const Form = () => {
         },
       ]);
     }
+    
   };
 
   const handleOnDragEnd = (result) => {
@@ -176,14 +207,7 @@ const Form = () => {
     console.log(formType)
   }
 
-  const handleRatingChange = (e) => {
-    console.log(e.target.value)
-    if (e.target.value == 'heart') {
-      setRatingIcon(<FavoriteIcon fontSize="inherit" />)
-      setRatingEmptyIcon(<FavoriteBorderIcon fontSize="inherit" />)
-    }
-  }
-
+  
   const removeItem = (id) => {
     let newArray = [...formType];
 
@@ -341,8 +365,9 @@ const Form = () => {
                                               <div
                                                 className="side-bar-content d-flex flex-row align-items-center justify-content-between"
                                                 style={{ backgroundColor: item.color }}
-                                                onClick={() => {
-                                                  console.log(provided.innerRef)
+                                                onClick={(e) => {
+                                                  console.log(item)
+                                                  setShowType(item.field_jsx)
                                                 }}
                                               >
                                                 <h2 >
@@ -382,15 +407,9 @@ const Form = () => {
 
                 <div className={`column form-content ${background}`}>
 
-                  {formType.map((item, key) => {
-                    return (
-                      <TabPanel>
-                        <div className="panel-content">
-                          <h2>{item.field_jsx}</h2>
-                        </div>
-                      </TabPanel>
-                    );
-                  })}
+               {
+                 showType
+               }
                 </div>
               </div>
             </Tabs>
@@ -407,7 +426,7 @@ const Form = () => {
                     },
                       'tab-nav-link ')}
                     onClick={() => { toggle('1'); }}
-                  >
+                  > 
                     Themes
                   </NavLink>
                 </NavItem>
@@ -498,7 +517,7 @@ const Form = () => {
                     <Col sm="12">
                       <label for="cars">Choose rating type:</label>
 
-                      <select name="starts" id="rating" onChange={e => handleRatingChange(e)}>
+                      <select name="starts" id="rating" >
                         <option value="select">select</option>
                         <option value="heart">heart</option>
                         <option value="saab">faces</option>

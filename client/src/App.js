@@ -18,6 +18,7 @@ const App = () => {
       <Route path="/viewfrom" element={<ViewForm/>}></Route>
       <Route path="/formpage" element={<Form/>}></Route>
       <Route path="/response" element={<Response/>}></Route> 
+      <Route path="/workspace" element={<Workspace/>}></Route> 
       <Route path="/errorpage404" element={<ErrorPage pageType="404" Content="Opps! Page not found" description="Sorry, the page you're looking for doesn't exist." />}></Route>
       <Route path="/errorpage401" element={<ErrorPage pageType="401" Content="No authorization found" description="This page is not publically available"/>}></Route>
       <Route path="/errorpage403" element={<ErrorPage pageType="403" Content="Access Denied / Forbidden" description="The page you are trying to access is absolutly forbidden for some reason"/>}></Route>

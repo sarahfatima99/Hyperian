@@ -28,6 +28,7 @@ export default function SingleChoiceAllVisible(props) {
         <span className='ques_no'>{props.questionNumber}.</span>
         <input type="text" className='input-ques' placeholder="Enter Question Text" style={{color:props.color}} />
         <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
+       <br/>
         {
 
           optionList.map((item, key) => {

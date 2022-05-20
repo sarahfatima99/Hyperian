@@ -10,17 +10,22 @@ app.use(express.urlencoded())
 
 router.post('/', (req, res) => {
     var request = new sql.sql.Request()
-    const user_id = req.body.user_id;
-
-    request.query(`INSERT INTO [Hyperian].[dbo].[Form] (User_id) OUTPUT Inserted.Form_id VALUES('${user_id}')`, function (err, recordset) {
+    const userId = req.body.userId;
+    const formTitle=req.body.formDetails.title
+    const formDesc=req.body.formDetails.details
+    var dateCreated=new Date().toISOString() + ""
+    // dateCreated=Date.parse(dateCreated)
+    console.log(typeof dateCreated)
+    console.log(req.body)
+    request.query(`INSERT INTO [Hyperian].[dbo].[FormDetails] (UserId,dateCreated,FormTitle,FormDescription) OUTPUT Inserted.FormId VALUES('${userId}','${dateCreated}','${formTitle}','${formDesc}')`, function (err, recordset) {
 
         if (err) {
             console.log(err)
 
-            res.send({ message: "Form registered FAILED" })
+            res.send({ message: err,success:0})
         }
         else {
-            res.send({ message: "Form registered", form_id: recordset['recordset'][0]['Form_id'] })
+            res.send({ message: "Form registered", form_id: recordset['recordset'][0]['FormId'] ,success:1})
 
         }
     });
