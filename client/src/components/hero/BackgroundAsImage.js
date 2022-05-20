@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Typical from 'react-typical';
+import FormModal from "components/accountbox/FormModal";
 import AccountBox from "components/accountbox";
 import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../headers/light";
 import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
@@ -54,6 +55,9 @@ function displaylogin(){
   
 }
 export default () => {
+  const [showModal,setShowModal] = useState(false);
+
+
   const navLinks = [
     <NavLinks key={1}>
       <NavLink href="#">
@@ -81,6 +85,7 @@ export default () => {
 
   return (
     <Container>
+    
       <OpacityOverlay />
       <HeroContainer>
         <StyledHeader links={navLinks} />
