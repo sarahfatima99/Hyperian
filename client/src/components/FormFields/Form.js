@@ -62,12 +62,12 @@ const Form = () => {
 
     setQuestionDescription(e);
     defaultJson.Pages[len].elements[0]['questionDescription'] = e;
-    console.log(defaultJson);
+    
   }
   const onChangeOptionList = (len,e) => {
     console.log(e);
     defaultJson.Pages[len].elements[len].optionsList = e;
-    console.log(defaultJson);
+    
   }
 const share = () =>{
  setActive(false);
@@ -114,7 +114,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Email") {
       SetFormType([
         ...formType,
@@ -125,7 +125,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Multi Line Text") {
       SetFormType([
         ...formType,
@@ -136,7 +136,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Slider") {
       SetFormType([
         ...formType,
@@ -147,7 +147,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
         ...formType,
@@ -158,7 +158,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
         ...formType,
@@ -169,7 +169,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Picture Choice") {
       SetFormType([
         ...formType,
@@ -180,7 +180,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Yes/No") {
       SetFormType([
         ...formType,
@@ -191,7 +191,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Ratings") {
       SetFormType([
         ...formType,
@@ -204,7 +204,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "File Upload") {
       SetFormType([
         ...formType,
@@ -215,7 +215,7 @@ const share = () =>{
         },
       ]);
       defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      console.log(defaultJson);
+      
     } else if (e == "Date") {
       SetFormType([
         ...formType,
@@ -235,8 +235,10 @@ const share = () =>{
   const handleOnDragEnd = (result) => {
     console.log(result)
     const items = Array.from(formType);
+    console.log(items)
     const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    console.log(reorderedItem);
+    console.log(items.splice(result.destination.index, 0, reorderedItem));
     SetFormType(items);
     
   }
@@ -394,13 +396,13 @@ const share = () =>{
                       ref={provided.innerRef}
                       {...provided.droppableProps}>
                       {formType.map((item, key) => {
+                       
                         return (
                           <>
                             <Draggable
                               key={key}
                               draggableId={"draggable-" + key}
-                              index={key}
-                            >
+                              index={key}>
                               {(provided) => (
                                 <div ref={provided.innerRef}
                                   {...provided.draggableProps}
