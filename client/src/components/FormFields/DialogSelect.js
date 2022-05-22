@@ -11,7 +11,7 @@ import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Dialogmodal from 'components/Dialogmodal';
+import Dialogmodal from '../Dialogmodal';
 
 const styles = theme => ({
   container: {

@@ -66,13 +66,23 @@ const LoginForm = () => {
         setLogininStatus(false)
       }
       else{
-        console.log(res.data)
         localStorage.setItem("token",res.data.token)
         localStorage.setItem("userinfo",res.data.result)
         setLogininStatus(true)
         userAuthenticated()
+        getPayload(res.data.result)
       
       }
+    })
+  }
+   
+  const getPayload=(userId)=>{
+
+    axios.get('http://localhost:9000/getData',{params:{
+      userId:userId
+    }})
+    .then((res)=>{
+      console.log(res)
     })
   }
 

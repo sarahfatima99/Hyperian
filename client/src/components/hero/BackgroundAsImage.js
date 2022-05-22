@@ -2,8 +2,8 @@ import React,{useState} from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Typical from 'react-typical';
-
-import AccountBox from "components/accountbox";
+import FormModal from "../FormFields/FormModal";
+import AccountBox from "../accountbox";
 import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../headers/light";
 import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
 import { render } from "@testing-library/react";
@@ -58,6 +58,9 @@ export default () => {
   const [showModal,setShowModal] = useState(false);
 
 
+  const openModal = () => {
+    setShowModal(prev => !prev)
+  }
   const navLinks = [
     <NavLinks key={1}>
       <NavLink href="#">
@@ -78,14 +81,14 @@ export default () => {
       <PrimaryLink href="/login">
          Login
       </PrimaryLink>
-    </NavLink>
+    </NavLink>  
     </NavLinks>
 
   ];
 
   return (
     <Container>
-    
+      <FormModal showModal={showModal} setShowModal={setShowModal}/>
       <OpacityOverlay />
       <HeroContainer>
         <StyledHeader links={navLinks} />

@@ -7,12 +7,23 @@ import  { useState } from 'react';
 import API from "./services";
 import _ from 'lodash';
 
-const SingleUploader = (props) => {
+const SingleUploader = ({questionNumber , onQuestionTitleChange,onQuestionDescriptionChange}) => {
  
-  let { id, label, uploadUrl } = props;
+//   let { id, label, uploadUrl } = props;
   const [isUploding, setUploding] = useState(false);
   const [uploadedImg, setUplodedImg] = useState("");
   const [uploadProgress, setProgress] = useState(0);
+
+  const Questionvalue = (e) =>{
+        
+    onQuestionTitleChange(e.target.value);
+
+}
+
+const Descriptionvalue = (e) => {
+    
+    onQuestionDescriptionChange(e.target.value);
+}
 
   const handleChange = async e => {
       
@@ -32,17 +43,17 @@ const SingleUploader = (props) => {
 
   return (
     <div className='form-type container'>
-    <span className='ques_no'>{props.questionNumber}.</span>
-    <input type="text" className='input-ques' placeholder="Enter Question Text" />
-    <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" />
+    <span className='ques_no'>{questionNumber}.</span>
+    <input type="text" className='input-ques' placeholder="Enter Question Text" onChange={Questionvalue} />
+    <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" onChange={Descriptionvalue} />
       <div className="form-group">
-          <label htmlFor={id} className="text-primary font-weight-bold">{label}</label>
+          {/* <label htmlFor={id} className="text-primary font-weight-bold">{label}</label> */}
           <div className="d-flex">
               <div className="d-flex">
                   <div className="file-uploader-mask d-flex justify-content-center align-items-center">
                       <img className="file-uploader-icon" src={upload} alt="Upload-Icon" />
                   </div>
-                  <input className="file-input" type="file" id={id} onChange={handleChange} />
+                  <input className="file-input" type="file" id='' onChange={handleChange} />
               </div>
               {/* {
                   isUploding ? (

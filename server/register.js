@@ -2,7 +2,7 @@
 
 
 app.post("/register",(req,res)=>{
-    // console.log(req.body);
+
  
     const {
         name,

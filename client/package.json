@@ -51,6 +51,7 @@
     "recharts": "^2.1.9",
     "redux": "^4.2.0",
     "styled-components": "^5.3.3",
+    "survey-creator-react": "^1.9.31",
     "tailwindcss": "^2.2.19",
     "twin.macro": "^2.8.1",
     "web-vitals": "^1.1.2"

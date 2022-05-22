@@ -4,30 +4,48 @@ import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-export default function Ratings(props) {
+export default function Ratings({questionNumber , onQuestionTitleChange,onQuestionDescriptionChange}) {
+
+  useEffect(() => {
+    window.addEventListener('mousemove', () => {});
+  
+    // returned function will be called on component unmount 
+    return () => {
+      window.removeEventListener('mousemove', () => {})
+    }
+  }, [])
 
     const [value,setValue] = useState(0);
+    const Questionvalue = (e) =>{
+        
+      onQuestionTitleChange(e.target.value);
+
+  }
+
+  const Descriptionvalue = (e) => {
+      
+      onQuestionDescriptionChange(e.target.value);
+  }
   return (
     <div>
       <div className="form-type container">
-        <span className="ques_no">{props.questionNumber}.</span>
+        <span className="ques_no">{questionNumber}.</span>
         <input
           type="text"
           className="input-ques"
-          placeholder="Enter Question Text"
+          placeholder="Enter Question Text" onChange={Questionvalue}
         />
         <textarea
           type="textarea"
           className="input-ques description"
-          placeholder="Enter Question Description (optional)"
+          placeholder="Enter Question Description (optional)"onChange={Descriptionvalue}
         />
 <br/>
         <Rating
           name="customized-color"
           value={value}
           size="large"
-          emptyIcon={props.ratingEmptyIcon} 
-          icon={props.ratingicon}
+         
           onChange={(event, newValue) => {
             setValue(newValue);
           }}

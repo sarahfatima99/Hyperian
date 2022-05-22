@@ -17,11 +17,13 @@ app.get("/", (req, res) => {
 const loginRouter=require('./auth/login')
 const signupRouter=require('./auth/signup')
 const formRouter=require('./routes/form')
+const getData=require('./routes/getData')
 
 
 app.use('/login',loginRouter)
 app.use('/register',signupRouter)
 app.use('/form',formRouter)
+app.use('/getData',getData)
 
 
 
