@@ -44,14 +44,7 @@ const MultiUploader = (props) => {
                     </div>
                     <input multiple className="file-input" type="file" id={id} onChange={handleChange} />
                 </div>
-                {/* {
-                    isUploding ? (
-                        <div className="flex-grow-1 px-2">
-                            <div className="text-center">{uploadProgress}%</div>
-                            <Progress value={uploadProgress} />
-                        </div>
-                    ) : null
-                } */}
+                
             </div>
             <div className="d-flex flex-wrap mt-4">
                 {

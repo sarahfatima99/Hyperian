@@ -13,8 +13,7 @@ import Workspace from "./Pages/Workspace/Workspace";
 import Response from "./Pages/Response/Response";
 import Survey1 from "./surveyForm/survey1"
 import ShareForm from "./components/FormFields/ShareForm";
-
-
+import UserShareForm from "./components/FormFields/UserShareForm";
 
 
 
@@ -27,6 +26,7 @@ const App = () => {
       <Route path="/createform" element={<Workspace/>}></Route>
       <Route path="/viewfrom" element={<ViewForm/>}></Route>
       <Route path="/formpage" element={<Form/>}></Route>
+      <Route path="/usershareform" element={<UserShareForm/>}></Route>
       <Route path="/response" element={<Response/>}></Route> 
       <Route path ="/workspace" element={<Workspace/>}></Route>
       <Route path="/errorpage404" element={<ErrorPage pageType="404" Content="Opps! Page not found" description="Sorry, the page you're looking for doesn't exist." />}></Route>

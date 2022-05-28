@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React from "react";
+import { Dropdown } from "reactstrap";
 import "./Form.css";
 import SingleLineText from './ShareFeildsTypes/SingleLineText';
 import MultiLineText from "./ShareFeildsTypes/MultiLineText"
@@ -12,84 +13,23 @@ import MultiChoiceQues from "./ShareFeildsTypes/MultiChoiceQues";
 import SliderQues from "./ShareFeildsTypes/SliderQues";
 import RatingQues from "./ShareFeildsTypes/RatingQues"
 import DropDownQues1 from './ShareFeildsTypes/DropDownQues1';
-import { Button,Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
-const ShareForm = ({data, formTittle , formDescription}) => {
-
-  const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const openInNewTab = (url) => {
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-    if (newWindow) newWindow.opener = null
-  }
-  
-  const copy = () => {
-    
-    
-    var copyText = document.getElementById("myInput");
-    console.log(copyText);
-    
-    
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); 
-  
-   
-    navigator.clipboard.writeText(copyText.value);
-    setCopied(true)
-    navigate("/usershareform",{state:{data:data,formTittle:formTittle,formDescription:formDescription}})
-  }
-  
-  return (
-    <>
-   <div className='container-fluid'>
-     <div className='row'>
-     <div
-                className="col-lg-12"
-                style={{
-                  border: "2px solid rgb(220, 220, 220)",
-                  boxShadow: "rgba(240, 230, 230, 0.76)",
-                }}
-              >
-                <div className="mt-3" style={{ paddingBottom: "10px" }}>
-                  <div className="d-flex flex-row justify-content-between">
-                    <h1 style={{ fontSize: "20px" }}>Preview</h1>
-                    <Button onClick={handleShow}>Share</Button>
-                    
-                  </div>
-                </div>
-              </div>
-
-     </div>
-     
-   </div>
-   <div className='container'>
+const UserShareForm = () =>{
+    const location = useLocation();
+    const data1 = location.state.data;
+    const formTittle1 = location.state.formTittle;
+    const formDescription1 = location.state.formDescription;
+    return(<>
+    <div className='container'>
      <div className='d-flex flex-column'></div>
-     <h1 className='input-ques' style={{padding:"10px"}}>Tittle : {formTittle}</h1>
-     <p style={{padding:"10px"}}>Description: {formDescription}</p>
+     <h1 className='input-ques' style={{padding:"10px"}}>Tittle : {formTittle1}</h1>
+     <p style={{padding:"10px"}}>Description :  {formDescription1}</p>
    </div>
-   <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Shareable Link</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='d-flex flex-column'>
-        <input value="http://localhost:3000/usershareform" id='myInput'/>
-        <button style={{float:"end"}} onClick={()=>{ openInNewTab("http://localhost:3000/usershareform"); copy();}}>{!copied ? "Copy link" : "Copied!"}</button>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-<div style={{alignItems:"center",padding:"30px"}}>
+   <div style={{alignItems:"center",padding:"30px"}}>
   
    
-    {data['Pages'].map((item) =>{
+    {data1['Pages'].map((item) =>{
       
       if(item.elements[0]['name'] === "Single Line text")
       {
@@ -199,7 +139,6 @@ const ShareForm = ({data, formTittle , formDescription}) => {
        
    
    </div>
-    </>
-  )
+    </>)
 }
-export default ShareForm;
+export default UserShareForm;
