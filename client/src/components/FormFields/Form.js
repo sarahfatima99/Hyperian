@@ -82,7 +82,7 @@ const Form = () => {
 
   const saveForm=()=>{
 
-    console.log(defaultJson['Pages'])
+    console.log(formId)
    
     axios.post("http://localhost:9000/form/question", {pages:defaultJson['Pages'],formId:formId})
     .then((res)=>{

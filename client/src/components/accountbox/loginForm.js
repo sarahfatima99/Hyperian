@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import {useSelector,useDispatch} from 'react-redux'
 import {  useNavigate } from 'react-router-dom';
 import {
   BoldLink,
@@ -17,11 +18,11 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import axios, { Axios } from "axios";
-
+import addPayload from './../../actions/index'
 
 const LoginForm = () => {
-  const { switchToSignup } = useContext(AccountContext);
-
+  const Dispatch=useDispatch()
+  const { switchToSignup } = useContext(AccountContext);  
   const [user, setUser] = useState({
 
     email: "",
@@ -70,8 +71,9 @@ const LoginForm = () => {
         localStorage.setItem("userinfo",res.data.result)
         setLogininStatus(true)
         userAuthenticated()
+        console.log('getting payload')
         getPayload(res.data.result)
-      
+        
       }
     })
   }
@@ -83,6 +85,9 @@ const LoginForm = () => {
     }})
     .then((res)=>{
       console.log(res)
+      const payloadData=res.data
+      Dispatch(addPayload(payloadData))
+
     })
   }
 

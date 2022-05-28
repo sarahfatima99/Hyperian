@@ -1,8 +1,8 @@
- const addQuestion = quesPayload=>{
+ const addPayload = Payload=>{
     return{
-        type:"addQues",
-        payload:quesPayload
+        type:"addPayload",
+        payload:Payload
     }
 }
 
-export default addQuestion
+export default addPayload

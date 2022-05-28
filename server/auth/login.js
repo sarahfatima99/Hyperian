@@ -10,7 +10,6 @@ const sql=require('./../DBconfig')
 const router=express.Router()
 
 router.post("/", (req, res) => {
-    // console.log(sql.sql.Request())
     var request = new sql.sql.Request()
     const {
         email,
@@ -20,7 +19,7 @@ router.post("/", (req, res) => {
     var form_id = 0;
 
     request.query(`select * from  [Hyperian].[dbo].[Users] where Email = '${email}'`, function (err, recordset) {
-       console.log(recordset)
+   
         if (recordset['recordset'][0]) {
 
 

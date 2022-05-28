@@ -15,8 +15,22 @@ router.post('/', (req, res) => {
     const formTitle = req.body.formDetails.title
     const formDesc = req.body.formDetails.details
     var dateCreated = new Date().toISOString() + ""
+    const query =
+        `              
+                    INSERT INTO [Hyperian].[dbo].[FormDetails]
+                    (UserId,dateCreated,FormTitle,FormDescription) 
+                    OUTPUT Inserted.FormId VALUES
 
-    request.query(`INSERT INTO [Hyperian].[dbo].[FormDetails] (UserId,dateCreated,FormTitle,FormDescription) OUTPUT Inserted.FormId VALUES('${userId}','${dateCreated}','${formTitle}','${formDesc}')`, function (err, recordset) {
+                    (
+                        '${userId}'
+                        ,'${dateCreated}'
+                        ,'${formTitle}'
+                        ,'${formDesc}'
+
+                    )                    
+                    
+                    `
+    request.query(query, function (err, recordset) {
 
         if (err) {
             console.log(err)
@@ -25,10 +39,13 @@ router.post('/', (req, res) => {
         }
         else {
             formid = recordset['recordset'][0]['FormId']
+
             res.send({ message: "Form registered", form_id: recordset['recordset'][0]['FormId'], success: 1 })
 
         }
     });
+
+
 
 })
 
@@ -45,7 +62,7 @@ router.post('/question', (req, res) => {
     var optionsList = []
     var options
     var formId = req.body.formId
-
+    var questionValues=[]
     for (let i = 0; i < formQuestions.length; i++) {
         console.log(formQuestions[i])
         questionType = formQuestions[i]['elements'][0].name
@@ -53,10 +70,10 @@ router.post('/question', (req, res) => {
         questionTitle = formQuestions[i]['elements'][0].questiontitle
         questionDescription = formQuestions[i]['elements'][0].questionDescription
         options = formQuestions[i]['elements'][0].options
-        optionsList = formQuestions[i]['elements'][0].optionsList
-
+        // optionsList = formQuestions[i]['elements'][0].optionsList
+        console.log(formId)
         const query2 =
-         `
+            `
         Insert into [Hyperian].[dbo].[questionDetails] 
         (questionType
         ,questionNumber
@@ -64,24 +81,23 @@ router.post('/question', (req, res) => {
         ,questionDetail,formId) 
         OUTPUT Inserted.QuestionId 
          Values(
-        (select QuestionId from [Hyperian].[dbo].[QuestionType] where [QuestionType]=
+        (select QuestionId from [Hyperian].[dbo].[QuestionType] 
+        where [QuestionType]=
         '${questionType}'),
         '${questionNumber}',
         '${questionTitle}',
         '${questionDescription}',
-        '${formId}')
-            
+        '${formId}')            
         `
-        request.query(query2, function (err, recordset) {
-
-            if (err) {
-                console.log(err)
-            }
-            else {
-                if (options == true && optionsList) {
-
+        request.query(query2)
+            .then(function (recordset) {
+                if (options == true) {
+                    optionsList = formQuestions[i]['elements'][0].optionsList
+                    console.log('inside if')
+                    console.log(optionsList.length, optionsList)
                     questionId = recordset['recordset'][0]['QuestionId']
-                    for (let i = 0; i < optionsList.length; i++) {
+
+                    for (let j = 0; j < optionsList.length; j++) {
                         var choice = optionsList[i].choice
                         const query3 = `
 
@@ -92,26 +108,21 @@ router.post('/question', (req, res) => {
                          
                          `
                         request.query(query3, function (err, recordset) {
-                            if (err) 
-                            {
+                            if (err) {
                                 console.log(err)
                             }
-                            else 
-                            {
+                            else {
                                 console.log('done')
                             }
 
                         })
                     }
-
                 }
-                else 
-                {
-                    console.log("question registered")
-                }
-
-            }
-        });
+            })
+            .catch(function (errorMessage) {
+                return errorMessage;
+            })
+            ;
     }
 
 }

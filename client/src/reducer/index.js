@@ -1,12 +1,12 @@
 import counterReducer from "./counter";
 import isLogged from "./isLogged";
-import addQues from './addQues'
+import addPayload from './addPayload'
 import { combineReducers } from "redux";
 
  const allReducer=combineReducers({
     counter:counterReducer,
     logged:isLogged,
-    addQues:addQues
+    Payload:addPayload
 })
 
 export default allReducer

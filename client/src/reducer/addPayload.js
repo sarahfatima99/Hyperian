@@ -1,8 +1,8 @@
-const addQues = (state={},action) =>
+const addPayload = (state={},action) =>
 {
     
 switch (action.type){
-    case "addQues":
+    case "addPayload":
         return {
             ...state,
             payload:action.payload
@@ -14,4 +14,4 @@ switch (action.type){
 
 }
 
-export default addQues 
+export default addPayload 

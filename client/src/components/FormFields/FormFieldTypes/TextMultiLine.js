@@ -3,7 +3,7 @@ import './FromFields.css'
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import useState from 'react-usestateref'
-import addQuestion from './../../../actions/index'
+import addPayload from './../../../actions/index'
 import axios, { Axios } from "axios";
 
 
