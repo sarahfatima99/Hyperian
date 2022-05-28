@@ -12,6 +12,7 @@ import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import FlakyIcon from '@mui/icons-material/Flaky';
 import GradeIcon from '@mui/icons-material/Grade';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 
 export const Descriptive = [
@@ -38,8 +39,9 @@ export const Descriptive = [
     {
       text: "Date",
       iconName: <EventIcon />,
-    },
-
+    }
+    
+    
 
   ];
 
@@ -49,8 +51,8 @@ export const Descriptive = [
       iconName: <SwitchAccountIcon />,
     },
     {
-      text: "Single Choice",
-      iconName: <SwitchAccountIcon />,
+      text: "SingleChoiceAllVisible",
+      iconName: <RadioButtonCheckedIcon />,
     },
     {
       text: "Drop Down (Single Choice)",

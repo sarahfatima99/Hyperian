@@ -6,6 +6,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 export default function Ratings({questionNumber , onQuestionTitleChange,onQuestionDescriptionChange}) {
 
+  useEffect(() => {
+    window.addEventListener('mousemove', () => {});
+  
+    // returned function will be called on component unmount 
+    return () => {
+      window.removeEventListener('mousemove', () => {})
+    }
+  }, [])
+
     const [value,setValue] = useState(0);
     const Questionvalue = (e) =>{
         

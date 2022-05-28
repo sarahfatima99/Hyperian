@@ -13,7 +13,6 @@ app.post("/login",(req,res)=>{
         email,
         password
     }=req.body
-    console.log(email)
     request.query(`select * from  [Hyperian].[dbo].[Users] where Email = '${email}'`, function (err, recordset){
       
         if(recordset['recordset'][0]){

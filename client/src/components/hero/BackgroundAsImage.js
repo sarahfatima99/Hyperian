@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import Typical from 'react-typical';
-import FormModal from "../accountbox/FormModal";
+import FormModal from "../FormFields/FormModal";
 import AccountBox from "../accountbox";
 import Header, { NavLink, NavLinks, PrimaryLink, LogoLink, NavToggle, DesktopNavLinks } from "../headers/light";
 import ResponsiveVideoEmbed from "../../helpers/ResponsiveVideoEmbed.js";
@@ -81,12 +81,7 @@ export default () => {
       <PrimaryLink href="/login">
          Login
       </PrimaryLink>
-    </NavLink>
-      <NavLink>
-      <PrimaryLink  onClick={openModal} >
-         Create Form
-      </PrimaryLink>
-    </NavLink>
+    </NavLink>  
     </NavLinks>
 
   ];

@@ -1,0 +1,33 @@
+SELECT TOP (1000) [FormId]
+      ,[UserId]
+      ,[dateCreated]
+      ,[FormTitle]
+      ,[FormDescription]
+  FROM [Hyperian].[dbo].[FormDetails]
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [ans_id]
+      ,[QuestId]
+      ,[AnswerText]
+  FROM [Hyperian].[dbo].[options]
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [QuestionId]
+      ,[questionType]
+      ,[questionNumber]
+      ,[questionText]
+      ,[questionDetail]
+      ,[formId]
+  FROM [Hyperian].[dbo].[questionDetails]
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [QuestionId]
+      ,[QuestionType]
+  FROM [Hyperian].[dbo].[QuestionType]
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [ID]
+      ,[Name]
+      ,[Email]
+      ,[Password]
+  FROM [Hyperian].[dbo].[Users]

@@ -43,7 +43,7 @@ export default function MultichoiceAllVisible({questionNumber , onQuestionTitleC
           optionList.map((item, key) => {
             return (
                 <div>                                
-                  <input type="textarea"  className=" multi-choice add-option"    placeholder={item.choice} onKeyDown={handleKeyDown} />                               
+                  <input type="textarea"  className=" multi-choice add-option"   placeholder={item.choice}    onKeyDown={handleKeyDown} />                               
                 </div>
                 )
                 })

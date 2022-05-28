@@ -46,22 +46,17 @@ const LoginForm = () => {
       [name]: value
     })
   }
-  const userAuthenticated=()=>{
-    
-
+  const userAuthenticated=()=>{ 
     axios.get("http://localhost:9000/login/isUserAuth",{headers:{
-      "x-access-token":localStorage.getItem("token")
-      
-
+      "x-access-token":localStorage.getItem("token")        
     },
   }
 
   )
     .then((response)=>
-    console.log(response)
+    navigate('/workspace')
     )
 
-    navigate('/')
   }
 
   const login = () => {
@@ -71,39 +66,26 @@ const LoginForm = () => {
         setLogininStatus(false)
       }
       else{
-        console.log(res.data)
         localStorage.setItem("token",res.data.token)
         localStorage.setItem("userinfo",res.data.result)
-       
         setLogininStatus(true)
         userAuthenticated()
-        // get_payload()
-      }
-    })
-  }
-
-  const get_payload=()=>{
-    const user_id=localStorage.getItem("userinfo")
-    console.log("user id :",user_id)
-    axios.get("http://localhost:9000/user_payload", {
-      params: {
-       user_id:user_id
-      }
-    })
-    .then((res)=>{
-      console.log(res.data)
-      if(!res.data.form_id){
-        console.log("no forms yet")
-      }
+        getPayload(res.data.result)
       
-      else{
-        console.log(res.data.form_id)
-        localStorage.setItem("forminfo",res.data.form_id)
       }
-
     })
-
   }
+   
+  const getPayload=(userId)=>{
+
+    axios.get('http://localhost:9000/getData',{params:{
+      userId:userId
+    }})
+    .then((res)=>{
+      console.log(res)
+    })
+  }
+
 
  
 

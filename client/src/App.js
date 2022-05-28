@@ -11,7 +11,6 @@ import ErrorPage from "./Pages/ErrorPages/ErrorPage";
 import ViewForm from "./Pages/ViewForm/ViewForm";
 import Workspace from "./Pages/Workspace/Workspace";
 import Response from "./Pages/Response/Response";
-import FormModal from "./components/accountbox/FormModal.js";
 import Survey1 from "./surveyForm/survey1"
 import ShareForm from "./components/FormFields/ShareForm";
 
@@ -21,7 +20,6 @@ import ShareForm from "./components/FormFields/ShareForm";
 
 const App = () => {
   return (<>
-
     <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/survey" element={<Survey1/>} />
@@ -30,7 +28,7 @@ const App = () => {
       <Route path="/viewfrom" element={<ViewForm/>}></Route>
       <Route path="/formpage" element={<Form/>}></Route>
       <Route path="/response" element={<Response/>}></Route> 
-      {/* <Route path="/shareform" element={<ShareForm/>}></Route> */}
+      <Route path ="/workspace" element={<Workspace/>}></Route>
       <Route path="/errorpage404" element={<ErrorPage pageType="404" Content="Opps! Page not found" description="Sorry, the page you're looking for doesn't exist." />}></Route>
       <Route path="/errorpage401" element={<ErrorPage pageType="401" Content="No authorization found" description="This page is not publically available"/>}></Route>
       <Route path="/errorpage403" element={<ErrorPage pageType="403" Content="Access Denied / Forbidden" description="The page you are trying to access is absolutly forbidden for some reason"/>}></Route>

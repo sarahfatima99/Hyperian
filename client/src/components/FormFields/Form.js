@@ -19,9 +19,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import Button from '@mui/material/Button';
-import { NavLink } from 'react-router-dom';
-import DialogSelect from './DialogSelect'
+import axios, { Axios } from "axios";
+import {  useNavigate,useLocation } from 'react-router-dom';
 import {
   Descriptive, Choice,
   fileUpload, Contact,
@@ -29,87 +28,139 @@ import {
 } from './dropDownitems'
 import {
   TabContent, TabPane, Nav,
-  NavItem,  Row, Col
+  NavItem, Row, Col
 } from 'reactstrap';
 import classnames from 'classnames';
 import ShareForm from "./ShareForm";
+import Website from "./FormFieldTypes/Website";
+import { Button } from "react-bootstrap";
 
 var defaultJson = [];
 defaultJson.Pages = [];
-var val1 = '';
-
+const formId=localStorage.getItem('formInfo')
 const Form = () => {
-  
-  const [activeFormType, setActiveFormType]=useState()
+
+  const location = useLocation();
+  const formTittle = location.state.tittle;
+  const formDescription = location.state.details;
+ 
+  const [activeFormType, setActiveFormType] = useState()
   const [formType, SetFormType] = useState([]);
   const [currentActiveTab, setCurrentActiveTab] = useState('1');
   const [background, setBackground] = useState('')
   const [textcolor, setTextcolor] = useState('')
   const [ratingEmptyIcon, setRatingEmptyIcon] = useState(<StarIcon fontSize="inherit" />)
   const [ratingIcon, setRatingIcon] = useState('')
-  const [questionTitle,setQuestionTitle] = useState('');
-  const [questionDescription,setQuestionDescription] = useState('');
-  const [active ,setActive] = useState(true);
+  const [questionTitle, setQuestionTitle] = useState('');
+  const [questionDescription, setQuestionDescription] = useState('');
+  const [active, setActive] = useState(true);
 
-  const onChangeQuestionTitle = (len,e) =>
-  {
+  const onChangeQuestionTitle = (len, e) => {
     setQuestionTitle(e);
     defaultJson.Pages[len].elements[0]['questiontitle'] = e;
-    
+
+
   }
 
-  const onChangeQuestionDescription = (len,e) =>{
+  const handleOnDragEnd = (result) => {
+    
+    const items = Array.from(formType);
+    console.log(items)
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    console.log(defaultJson.Pages)
+    const [dest] = items.splice(result.destination.index,1)
+    items.splice(result.destination.index, 0, reorderedItem);
+    
+    SetFormType(items);
+
+  }
+
+  const onChangeQuestionDescription = (len, e) => {
 
     setQuestionDescription(e);
     defaultJson.Pages[len].elements[0]['questionDescription'] = e;
     
   }
-  const onChangeOptionList = (len,e) => {
+
+  const onChangeOptionList = (len, e) => {
     console.log(e);
-    defaultJson.Pages[len].elements[len].optionsList = e;
+    defaultJson.Pages[len].elements[0].optionsList = e;
     
   }
-const share = () =>{
- setActive(false);
-}
 
+  const share = () => {
+    setActive(false);
+  }
+
+  const removeItem = (id) => {
+    let newArray = [...formType];
+
+    newArray.splice(id, 1);
+    SetFormType(newArray);
+  };
+
+  const saveForm=()=>{
+
+   
+   
+    axios.post("http://localhost:9000/form/question", {pages:defaultJson['Pages'],formId:formId})
+    .then((res)=>{
+     console.log(res)
+
+    })
+  } 
+  
 
   const toggle = tab => {
     if (currentActiveTab !== tab) setCurrentActiveTab(tab);
   }
   const handleSelect = (e) => {
-    
-    
+
+
     if (e == "Single Line text") {
-      
+
       SetFormType([
         ...formType,
         {
           field_type: e,
-          field_jsx: <SingleLineQues questionNumber={formType.length + 1}  onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)}/>,
+          field_jsx: <SingleLineQues questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "pink"
         },
       ]);
-      defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:'',questionDescription:''}] })
-      
-      
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: '', questionDescription: '',options:false }] })
+
+
     } else if (e == "Multiple Choice") {
       SetFormType([
         ...formType,
         {
           field_type: e,
-          field_jsx: <MultichoiceAllVisible questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} onOptionListChange= {(e) => onChangeOptionList(formType.length,e)}   />,
+          field_jsx: <MultichoiceAllVisible questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} onOptionListChange={(e) => onChangeOptionList(formType.length, e)} />,
           color: "orange"
         },
       ]);
-      defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:"",optionsList:[] } ] })
-      
-    } else if (e == "Phone") {
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", optionsList: [],options:true }] })
+
+    }
+    else if (e == "Website")
+    {
       SetFormType([
         ...formType,
         {
           field_type: e,
-          field_jsx: <Phone questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <Website questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} onOptionListChange={(e) => onChangeOptionList(formType.length, e)} />,
+          color: "orange"
+        },
+      ]);
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:false }] })
+
+    }
+     else if (e == "Phone") {
+      SetFormType([
+        ...formType,
+        {
+          field_type: e,
+          field_jsx: <Phone questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#8b94d9"
         },
       ]);
@@ -120,7 +171,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <Email questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)}  />,
+          field_jsx: <Email questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#bcc466"
         },
       ]);
@@ -131,7 +182,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <TextMultiLine questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <TextMultiLine questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "yellow"
         },
       ]);
@@ -142,7 +193,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <Slider questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)}  />,
+          field_jsx: <Slider questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#32a889"
         },
       ]);
@@ -153,7 +204,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <DropDown questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} onOptionListChange= {(e) => onChangeOptionList(formType.length,e)} />,
+          field_jsx: <DropDown questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} onOptionListChange={(e) => onChangeOptionList(formType.length, e)} />,
           color: "#8988a8"
         },
       ]);
@@ -164,7 +215,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <DropDown questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} onOptionListChange= {(e) => onChangeOptionList(formType.length,e)} />,
+          field_jsx: <DropDown questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} onOptionListChange={(e) => onChangeOptionList(formType.length, e)} />,
           color: "#a89888"
         },
       ]);
@@ -175,7 +226,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <PictureChoice questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <PictureChoice questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#b37978"
         },
       ]);
@@ -186,7 +237,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <YesNo questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <YesNo questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)}/>,
           color: "#b37899"
         },
       ]);
@@ -197,7 +248,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <Ratings questionNumber={formType.length + 1}  ratingicon={ratingIcon} ratingEmptyIcon={ratingEmptyIcon} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <Ratings questionNumber={formType.length + 1} ratingicon={ratingIcon} ratingEmptyIcon={ratingEmptyIcon} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#dd99ff"
 
 
@@ -210,7 +261,7 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <FileUpload questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <FileUpload questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#523a63"
         },
       ]);
@@ -221,372 +272,324 @@ const share = () =>{
         ...formType,
         {
           field_type: e,
-          field_jsx: <Date questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length , e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length , e)} />,
+          field_jsx: <Date questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "#b3ffb3"
 
         },
       ]);
-      defaultJson.Pages.push({name:"Page "+formType.length,elements:[{name:e,questionNumber:formType.length + 1,questiontitle:"",questionDescription:""}] })
-      
-    }
-    console.log(formType)
-  };
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] ,options:false})
 
-  const handleOnDragEnd = (result) => {
-    console.log(result)
-    const items = Array.from(formType);
-    console.log(items)
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    console.log(reorderedItem);
-    console.log(items.splice(result.destination.index, 0, reorderedItem));
-    SetFormType(items);
+    }
     
-  }
-
-  const handleRatingChange = (e) => {
-    console.log(e.target.value)
-    if (e.target.value == 'heart') {
-      setRatingIcon(<FavoriteIcon fontSize="inherit" />)
-      setRatingEmptyIcon(<FavoriteBorderIcon fontSize="inherit" />)
-    }
-  }
-
-  const removeItem = (id) => {
-    let newArray = [...formType];
-
-    newArray.splice(id, 1);
-    SetFormType(newArray);
   };
 
-   return(
-     <>
-   {active ? 
 
-<>
- <div className="container-fluid">
-<div className="row">
-<div
-  className="col-lg-12"
-  style={{
-    border: "2px solid rgb(220, 220, 220)",
-    boxShadow: "rgba(240, 230, 230, 0.76)",
-  }}
->
-  <div className="mt-3" style={{ paddingBottom: "10px" }}>
-    <div className="d-flex flex-row justify-content-between">
-      <h1 style={{ fontSize: "20px" }}>Hyperion / Create Form</h1>
-    </div>
-  </div>
-</div>
-</div>
-</div>
 
-<div className="form-main-body container-fluid">
-<div className="row">
-<div className="col-lg-9" style={{ paddingLeft: "0" }}>
-  <Tabs>
-    <div className="row forms-views " >
 
-      <div className="column form-area" style={{ height: "700px" }}>
-        <div className=" side-panel tools-side-bar">
-          <div className="add-button">
-            <DropdownButton
-              key="end"
-              drop="end"
-              id={`dropdown-button-drop-end`}
-              title="+"
-              onSelect={handleSelect}
-            >
-              <div className="container-fluid">
-                <div className="row row1">
-                  <div className="column">
-                    <h1 className="headings descriptive">
-                      Descriptive Fields
-                    </h1>
-                    {Descriptive.map((item) => {
 
-                      return (
-                        <Dropdown.Item
-                          className="drop-down-item-row1"
-                          eventKey={item.text}
-                        >
-                          <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
-                            <div>{item.iconName}</div>
-                            <div>{item.text}</div>
-                          </div>
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </div>
-                  <div className="column">
-                    <h1 className="headings choice">Choice</h1>
-                    {Choice.map((item) => {
-                      return (
-                        <Dropdown.Item
-                          className="drop-down-item-row1"
-                          style={{ backgroundColor: item.color }}
-                          eventKey={item.text}
-                        >
-                          <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
-                            <div>{item.iconName}</div>
-                            <div>{item.text}</div>
-                          </div>
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </div>
-                  <div className="column">
-                    <h1 className="headings upload">Upload</h1>
-                    {fileUpload.map((item) => {
-                      return (
-                        <Dropdown.Item
-                          className="drop-down-item-row1"
-                          style={{ backgroundColor: item.color }}
-                          eventKey={item.text}
-                        >
-                          <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
-                            <div>{item.iconName}</div>
-                            <div>{item.text}</div>
-                          </div>
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="row row1">
-                  <div className="column drop-down-item-row2 general-items">
-                    <h1 className="headings general">General</h1>
-                    {General.map((item) => {
-                      return (
-                        <Dropdown.Item
-                          style={{ backgroundColor: item.color }}
-                          eventKey={item.text}
-                        >
-                          <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
-                            <div>{item.iconName}</div>
-                            <div>{item.text}</div>
-                          </div>
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </div>
-                  <div className="column drop-down-item-row2 contact-items">
-                    <h1 className="headings contact">Contact</h1>
-                    {Contact.map((item) => {
-                      return (
-                        <Dropdown.Item eventKey={item.text}>
-                          <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
-                            <div>{item.iconName}</div>
-                            <div>{item.text}</div>
-                          </div>
-                        </Dropdown.Item>
-                      );
-                    })}
+
+  return (
+    <>
+      {active ?
+
+        <>
+          <div className="container-fluid">
+            <div className="row">
+              <div
+                className="col-lg-12"
+                style={{
+                  border: "2px solid rgb(220, 220, 220)",
+                  boxShadow: "rgba(240, 230, 230, 0.76)",
+                }}
+              >
+                <div className="mt-3" style={{ paddingBottom: "10px" }}>
+                  <div className="d-flex flex-row justify-content-between">
+                    <h1 style={{ fontSize: "20px" }}>Hyperion / Create Form</h1>
+                    <Button style={{ backgroundColor: "#39cc83", color: "black", border: "none", borderRadius: "5px", width: "auto", padding: "8px" }} onClick={saveForm}>Save Form</Button>
                   </div>
                 </div>
               </div>
-            </DropdownButton>
+            </div>
           </div>
-          <TabList>
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-              <Droppable droppableId="Tab-list" >
-                {
-                  (provided) => (
-                    <div className="Tab-list"
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}>
-                      {formType.map((item, key) => {
-                       
-                        return (
-                          <>
-                            <Draggable
-                              key={key}
-                              draggableId={"draggable-" + key}
-                              index={key}>
-                              {(provided) => (
-                                <div ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}>
-                                  <Tab>
-                                    <div
-                                      className="side-bar-content d-flex flex-row align-items-center justify-content-between"
-                                      style={{ backgroundColor: item.color }}
-                                      onClick={() => {
-                                        setActiveFormType(item.field_jsx)
-                                      }}
-                                    >
-                                      <h2 >
-                                        {key + 1}.
-                                        <span style={{ marginLeft: "12px" }}>
-                                          {item.field_type}
-                                        </span>
-                                      </h2>
-                                      <div>
-                                        <i
-                                          onClick={() => {
-                                            removeItem(key);
-                                          }}
 
-                                          class="fa fa-trash"
-                                          aria-hidden="true"
-                                        ></i>
-                                      </div>
-                                    </div>
+          <div className="form-main-body container-fluid">
+            <div className="row">
+              <div className="col-lg-9" style={{ paddingLeft: "0" }}>
+                <Tabs>
+                  <div className="row forms-views " >
 
-                                  </Tab>
+                    <div className="column form-area" style={{ height: "700px" }}>
+                      <div className=" side-panel tools-side-bar">
+                        <div className="add-button">
+                          <DropdownButton
+                            key="end"
+                            drop="end"
+                            id={`dropdown-button-drop-end`}
+                            title="+"
+                            onSelect={handleSelect}
+                          >
+                            <div className="container-fluid">
+                              <div className="row row1">
+                                <div className="column">
+                                  <h1 className="headings descriptive">
+                                    Descriptive Fields
+                                  </h1>
+                                  {Descriptive.map((item) => {
+
+                                    return (
+                                      <Dropdown.Item
+                                        className="drop-down-item-row1"
+                                        eventKey={item.text}
+                                      >
+                                        <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
+                                          <div>{item.iconName}</div>
+                                          <div>{item.text}</div>
+                                        </div>
+                                      </Dropdown.Item>
+                                    );
+                                  })}
                                 </div>
-                              )}
-                            </Draggable>
+                                <div className="column">
+                                  <h1 className="headings choice">Choice</h1>
+                                  {Choice.map((item) => {
+                                    return (
+                                      <Dropdown.Item
+                                        className="drop-down-item-row1"
+                                        style={{ backgroundColor: item.color }}
+                                        eventKey={item.text}
+                                      >
+                                        <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
+                                          <div>{item.iconName}</div>
+                                          <div>{item.text}</div>
+                                        </div>
+                                      </Dropdown.Item>
+                                    );
+                                  })}
+                                </div>
+                                <div className="column">
+                                  <h1 className="headings upload">Upload</h1>
+                                  {fileUpload.map((item) => {
+                                    return (
+                                      <Dropdown.Item
+                                        className="drop-down-item-row1"
+                                        style={{ backgroundColor: item.color }}
+                                        eventKey={item.text}
+                                      >
+                                        <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
+                                          <div>{item.iconName}</div>
+                                          <div>{item.text}</div>
+                                        </div>
+                                      </Dropdown.Item>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                              <div className="row row1">
+                                <div className="column drop-down-item-row2 general-items">
+                                  <h1 className="headings general">General</h1>
+                                  {General.map((item) => {
+                                    return (
+                                      <Dropdown.Item
+                                        style={{ backgroundColor: item.color }}
+                                        eventKey={item.text}
+                                      >
+                                        <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
+                                          <div>{item.iconName}</div>
+                                          <div>{item.text}</div>
+                                        </div>
+                                      </Dropdown.Item>
+                                    );
+                                  })}
+                                </div>
+                                <div className="column drop-down-item-row2 contact-items">
+                                  <h1 className="headings contact">Contact</h1>
+                                  {Contact.map((item) => {
+                                    return (
+                                      <Dropdown.Item eventKey={item.text}>
+                                        <div style={{ gap: "5px" }} className="d-flex flex-row align-items-center space-around-between">
+                                          <div>{item.iconName}</div>
+                                          <div>{item.text}</div>
+                                        </div>
+                                      </Dropdown.Item>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          </DropdownButton>
+                        </div>
+                        <TabList>
+                          <DragDropContext onDragEnd={handleOnDragEnd}>
+                            <Droppable droppableId="Tab-list" >
+                              {
+                                (provided) => (
+                                  <div className="Tab-list"
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}>
+                                    {formType.map((item, key) => {
+                                      return (
+                                        <>
+                                          <Draggable
+                                            key={key}
+                                            draggableId={"draggable-" + key}
+                                            index={key}
+                                          >
+                                            {(provided) => (
+                                              <div ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}>
+                                                <Tab>
+                                                  <div
+                                                    className="side-bar-content d-flex flex-row align-items-center justify-content-between"
+                                                    style={{ backgroundColor: item.color }}
+                                                    onClick={() => {
+                                                      setActiveFormType(item.field_jsx)
+                                                    }}
+                                                  >
+                                                    <h2 >
+                                                      {key + 1}.
+                                                      <span style={{ marginLeft: "12px" }}>
+                                                        {item.field_type}
+                                                      </span>
+                                                    </h2>
+                                                    <div>
+                                                      <i
+                                                        onClick={() => {
+                                                          removeItem(key);
+                                                        }}
 
-                          </>
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>)}
-              </Droppable>
-            </DragDropContext>
-          </TabList>
-        </div>
+                                                        class="fa fa-trash"
+                                                        aria-hidden="true"
+                                                      ></i>
+                                                    </div>
+                                                  </div>
 
-      </div>
+                                                </Tab>
+                                              </div>
+                                            )}
+                                          </Draggable>
 
-      <div className={`column form-content ${background}`}>
+                                        </>
+                                      );
+                                    })}
+                                    {provided.placeholder}
+                                  </div>)}
+                            </Droppable>
+                          </DragDropContext>
+                        </TabList>
+                      </div>
 
-       {activeFormType}
-      </div>
-    </div>
-  </Tabs>
-</div>
+                    </div>
 
-<div className="col-lg-3" style={{ height: "700px" }}>
-  <div className="logic-design-side-bar">
-    <Nav tabs>
-      <NavItem>
-        {/* <NavLink
-          className={classnames({
-            active:
-              currentActiveTab === '1'
-          },
-            'tab-nav-link ')}
-          onClick={() => { toggle('1'); }}
-        >
-          Themes
-        </NavLink> */}
-      </NavItem>
-      <NavItem>
-        {/* <NavLink
-          className={classnames({
-            active:
-              currentActiveTab === '2'
-          }, 'tab-nav-link ')}
-          onClick={() => { toggle('2'); }}
-        >
+                    <div className={`column form-content ${background}`}>
 
-          Design
-        </NavLink> */}
-      </NavItem>
+                      {activeFormType}
+                    </div>
+                  </div>
+                </Tabs>
+              </div>
 
-    </Nav>
-    <TabContent activeTab={currentActiveTab}>
-      <TabPane tabId="1">
-        <Row>
-          <Col sm="12">
-            <ul>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('basic')
-                  }
-                } >
-                  basic
-                </button>
-              </li>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('plainblue')
-                  }
-                }>
-                  plain blue
-                </button>
-              </li>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('pink')
-                  }
-                }>
-                  pink
-                </button >
-              </li>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('orange')
-                  }
-                }>
-                  orange
-                </button>
-              </li>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('nightscape')
-                  }
-                }>
-                  night scape
-                </button>
-              </li>
-              <li>
-                <button onClick={
-                  () => {
-                    setBackground('abstract')
-                  }
-                }>
-                  abtstract
-                </button>
-              </li>
-              <li>
-                <button>
-                  fractal
-                </button>
-              </li>
-            </ul>
-          </Col>
-        </Row>
-      </TabPane>
-      <TabPane tabId="2">
-        <Row>
-          <Col sm="12">
-            <label for="cars">Choose rating type:</label>
+              <div className="col-lg-3" style={{ height: "700px" }}>
+                <div className="logic-design-side-bar">
+                  <Nav tabs>
+                    <NavItem>
+                      
+                    </NavItem>
 
-            <select name="starts" id="rating" onChange={e => handleRatingChange(e)}>
-              <option value="select">select</option>
-              <option value="heart">heart</option>
-              <option value="saab">faces</option>
-              <option value="mercedes">world</option>
-              <option value="audi">Audi</option>
-            </select>
+                  </Nav>
+                  <TabContent activeTab={currentActiveTab}>
+                    <TabPane tabId="1">
+                      <Row>
+                        <Col sm="12">
+                          <ul>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('basic')
+                                }
+                              } >
+                                basic
+                              </button>
+                            </li>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('plainblue')
+                                }
+                              }>
+                                plain blue
+                              </button>
+                            </li>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('pink')
+                                }
+                              }>
+                                pink
+                              </button >
+                            </li>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('orange')
+                                }
+                              }>
+                                orange
+                              </button>
+                            </li>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('nightscape')
+                                }
+                              }>
+                                night scape
+                              </button>
+                            </li>
+                            <li>
+                              <button onClick={
+                                () => {
+                                  setBackground('abstract')
+                                }
+                              }>
+                                abtstract
+                              </button>
+                            </li>
+                            <li>
+                              <button>
+                                fractal
+                              </button>
+                            </li>
+                          </ul>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                      <Row>
+                        <Col sm="12">
+                          <label for="cars">Choose rating type:</label>
 
-          </Col>
-        </Row>
-      </TabPane>
-    </TabContent>
 
-  </div>
-</div>
-</div>
-</div>
-<div>
-<button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}} onClick={share}>Share</button>
-</div>
-</>
-: <ShareForm data={defaultJson}/>}
+                        </Col>
+                      </Row>
+                    </TabPane>
+                  </TabContent>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button style={{ backgroundColor: "#39cc83", color: "black", border: "none", borderRadius: "5px", width: "auto", padding: "8px" }} onClick={share}>Preview</button>
+          </div>
+        </>
+        : <ShareForm data={defaultJson} formTittle = {formTittle} formDescription={formDescription} />}
 
 
 
-   </>)
-    
+    </>)
 
-                    }
+
+}
 export default Form;
