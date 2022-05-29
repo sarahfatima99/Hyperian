@@ -2024,6 +2024,16 @@
     "@react-spring/shared" "~9.4.3-beta.0"
     "@react-spring/types" "~9.4.3-beta.0"
 
+"@reduxjs/toolkit@^1.8.1":
+  "integrity" "sha512-Q6mzbTpO9nOYRnkwpDlFOAbQnd3g7zj7CtHAZWz5SzE5lcV97Tf8f3SzOO8BoPOMYBFgfZaqTUZqgGu+a0+Fng=="
+  "resolved" "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.8.1.tgz"
+  "version" "1.8.1"
+  dependencies:
+    "immer" "^9.0.7"
+    "redux" "^4.1.2"
+    "redux-thunk" "^2.4.1"
+    "reselect" "^4.1.5"
+
 "@restart/context@^2.1.4":
   "integrity" "sha512-INJYZQJP7g+IoDUh/475NlGiTeMfwTXUEr3tmRneckHIxNolGOW9CTq83S8cxq0CgJwwcMzMJFchxvlwe7Rk8Q=="
   "resolved" "https://registry.npmjs.org/@restart/context/-/context-2.1.4.tgz"
@@ -2894,11 +2904,6 @@
   dependencies:
     "mime-types" "~2.1.24"
     "negotiator" "0.6.2"
-
-"ace-builds@^1.4.12":
-  "integrity" "sha512-NBOQlm9+7RBqRqZwimpgquaLeTJFayqb9UEPtTkpC3TkkwDnlsT/TwsCC0svjt9kEZ6G9mH5AEOHSz6Q/HrzQQ=="
-  "resolved" "https://registry.npmjs.org/ace-builds/-/ace-builds-1.4.14.tgz"
-  "version" "1.4.14"
 
 "acorn-globals@^6.0.0":
   "integrity" "sha512-ZQl7LOWaF5ePqqcX4hLuv/bLXYQNfNWw2c0/yX/TsPRKamzHcTGQnlCjHT3TsmkOUVEPS3crCxiPfdzE/Trlhg=="
@@ -6110,6 +6115,11 @@
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
 
+"file-uri-to-path@1.0.0":
+  "integrity" "sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw=="
+  "resolved" "https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz"
+  "version" "1.0.0"
+
 "filesize@6.1.0":
   "integrity" "sha512-LpCHtPQ3sFx67z+uh2HnSyWSLLu5Jxo21795uRDuar/EOuYWXib5EmPaGIBuSnRqH2IODiKA2k5re/K9OnN/Yg=="
   "resolved" "https://registry.npmjs.org/filesize/-/filesize-6.1.0.tgz"
@@ -6887,6 +6897,11 @@
   "integrity" "sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw=="
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.1.8.tgz"
   "version" "5.1.8"
+
+"immer@^9.0.7":
+  "integrity" "sha512-lk7UNmSbAukB5B6dh9fnh5D0bJTOFKxVg2cyJWTYrWRfhLrLMBquONcUs3aFq507hNoIZEDDh8lb8UtOizSMhA=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.12.tgz"
+  "version" "9.0.12"
 
 "immer@8.0.1":
   "integrity" "sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA=="
@@ -10809,7 +10824,7 @@
     "react-fast-compare" "^3.0.1"
     "warning" "^4.0.2"
 
-"react-redux@^7.2.0":
+"react-redux@^7.2.0", "react-redux@^7.2.1 || ^8.0.0-beta":
   "integrity" "sha512-10RPdsz0UUrRL1NZE0ejTkucnclYSgXp5q+tB5SWx2qeG2ZJQJyymgAhwKy73yiL/13btfB6fPr+rgbMAaZIAQ=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-7.2.6.tgz"
   "version" "7.2.6"
@@ -10983,7 +10998,12 @@
   dependencies:
     "@camwiegert/typical" "^0.1.1"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.5.0 || ^17.0.1", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^16.8.5 || ^17.0.0", "react@^17.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=0.16.8", "react@>=15.0.0", "react@>=16.11", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@>=16.x", "react@17.0.2":
+"react-usestateref@^1.0.8":
+  "integrity" "sha512-whaE6H0XGarFKwZ3EYbpHBsRRCLZqdochzg/C7e+b6VFMTA3LS3K4ZfpI4NT40iy83jG89rGXrw70P9iDfOdsA=="
+  "resolved" "https://registry.npmjs.org/react-usestateref/-/react-usestateref-1.0.8.tgz"
+  "version" "1.0.8"
+
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16 || ^17", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react@^0.14.9 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0", "react@^16.5.0 || ^17.0.1", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^16.8.5 || ^17.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^17.0.0", "react@^17.0.1", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=0.14.0", "react@>=0.16.8", "react@>=15.0.0", "react@>=16.11", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8", "react@>=16.8 || ^17.0.0", "react@>=16.8.0", "react@>=16.x", "react@>16.0.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -11119,10 +11139,15 @@
     "css-unit-converter" "^1.1.1"
     "postcss-value-parser" "^3.3.0"
 
-"redux@^4.0.0", "redux@^4.0.4":
-  "integrity" "sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw=="
-  "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.2.tgz"
-  "version" "4.1.2"
+"redux-thunk@^2.4.1":
+  "integrity" "sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q=="
+  "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.4.1.tgz"
+  "version" "2.4.1"
+
+"redux@^4", "redux@^4.0.0", "redux@^4.0.4", "redux@^4.1.2", "redux@^4.2.0":
+  "integrity" "sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA=="
+  "resolved" "https://registry.npmjs.org/redux/-/redux-4.2.0.tgz"
+  "version" "4.2.0"
   dependencies:
     "@babel/runtime" "^7.9.2"
 
@@ -11255,6 +11280,11 @@
   "integrity" "sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8="
   "resolved" "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   "version" "1.0.0"
+
+"reselect@^4.1.5":
+  "integrity" "sha512-uVdlz8J7OO+ASpBYoz1Zypgx0KasCY20H+N8JD13oUMtPvSHQuscrHop4KbXrbsBcdB9Ds7lVK7eRkBIfO43vQ=="
+  "resolved" "https://registry.npmjs.org/reselect/-/reselect-4.1.5.tgz"
+  "version" "4.1.5"
 
 "resize-observer-polyfill@^1.5.0", "resize-observer-polyfill@^1.5.1":
   "integrity" "sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg=="
@@ -12342,32 +12372,32 @@
     "supports-color" "^7.0.0"
 
 "survey-core@*", "survey-core@^1.9.9":
-  "integrity" "sha512-XUA4spyMFNpVXPOGhrP+kH8NyQz7bb2VMFXaVSLqm5BTGpWADRQ/IwpE3lOUQdsvlXYG2JA68cJRXCElX+MrKA=="
-  "resolved" "https://registry.npmjs.org/survey-core/-/survey-core-1.9.24.tgz"
-  "version" "1.9.24"
+  "integrity" "sha512-9zw3G+5qwO11goCvGRWq7ljk8evTmuWfE/d3hNjb3x7z8js9w7iBbSv0ROUiLlGcyrWhd8AOBwC7ePQlzw4o0Q=="
+  "resolved" "https://registry.npmjs.org/survey-core/-/survey-core-1.9.31.tgz"
+  "version" "1.9.31"
 
-"survey-creator-core@1.9.24":
-  "integrity" "sha512-Mve8XdDxEZG9XTFeEnMBQWagEzS6LlxZcWIT793jA/r+5ZQCnqOJ01yiyVvBU/ZP4hSAq2QjsPYBelSHAQJnkA=="
-  "resolved" "https://registry.npmjs.org/survey-creator-core/-/survey-creator-core-1.9.24.tgz"
-  "version" "1.9.24"
+"survey-creator-core@1.9.31":
+  "integrity" "sha512-li09kNqr0oudapPSItvYfHckmyw2zYaBkSU/LYHLib7ILdWZ0t9FI0oUZyTinQR6fHtIVVJfiO5ikATN35FJRg=="
+  "resolved" "https://registry.npmjs.org/survey-creator-core/-/survey-creator-core-1.9.31.tgz"
+  "version" "1.9.31"
   dependencies:
     "survey-core" "^1.9.9"
 
-"survey-creator-react@^1.9.24":
-  "integrity" "sha512-5iCszDUTBwCbiCABP3ES9gOVCEAY1Oj0HpHRyLVKwRYbZhvQ7PHbRppvnQ1gpIaSl2usozljIXdLYIJlLNecIw=="
-  "resolved" "https://registry.npmjs.org/survey-creator-react/-/survey-creator-react-1.9.24.tgz"
-  "version" "1.9.24"
+"survey-creator-react@^1.9.31":
+  "integrity" "sha512-HG2IdJXjsnC/+nhxf6jmu7rDVEAyFp6NSI8ZNLZC4qMQcxwI8u3mbr4lgRnw2ETTk4HlmiPzVH5BSf03aeTdBw=="
+  "resolved" "https://registry.npmjs.org/survey-creator-react/-/survey-creator-react-1.9.31.tgz"
+  "version" "1.9.31"
   dependencies:
     "react" "^17.0.1"
     "react-dom" "^17.0.1"
     "survey-core" "^1.9.9"
-    "survey-creator-core" "1.9.24"
+    "survey-creator-core" "1.9.31"
     "survey-react-ui" "^1.9.9"
 
 "survey-react-ui@^1.9.9":
-  "integrity" "sha512-/90OBqSx6cLXy/1Xh9bUg0sMQPkXbi3Da/iUHGE3J1lWOC7XxthbLNsQBwJRmojpzcT2ry0+xxLyPUtrM10idg=="
-  "resolved" "https://registry.npmjs.org/survey-react-ui/-/survey-react-ui-1.9.24.tgz"
-  "version" "1.9.24"
+  "integrity" "sha512-xc266UJsU4ZSDii3yexiym/Q4nby7LshSnZw4Hc6mrX+j9HkyhY9IZFBcHYRSjqIaSTEsNApk+5sIvSCQzMT1g=="
+  "resolved" "https://registry.npmjs.org/survey-react-ui/-/survey-react-ui-1.9.31.tgz"
+  "version" "1.9.31"
   dependencies:
     "react" "^16.5.0 || ^17.0.1"
     "react-dom" "^16.5.0 || ^17.0.1"

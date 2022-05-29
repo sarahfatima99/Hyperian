@@ -28,7 +28,7 @@ export default function Date({questionNumber , onQuestionTitleChange,onQuestionD
                 <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" onChange={Descriptionvalue} />
                <br/>
                 <LocalizationProvider style={{marginTop:"100px"}} dateAdapter={AdapterDateFns}>
-                    <DatePicker
+                    <DatePicker disabled
                         
                         label="Select date"
                         value={value}

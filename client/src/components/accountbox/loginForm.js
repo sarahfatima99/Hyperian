@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import {useSelector,useDispatch} from 'react-redux'
-import {  useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import {
   BoldLink,
   BoxContainer,
@@ -21,19 +21,16 @@ import axios, { Axios } from "axios";
 import addPayload from './../../actions/index'
 
 const LoginForm = () => {
-  const Dispatch=useDispatch()
-  const { switchToSignup } = useContext(AccountContext);  
+  const navigate = useNavigate();
+  const [loginStatus, setLogininStatus] = useState(false)
+  const Dispatch = useDispatch()
+  const { switchToSignup } = useContext(AccountContext);
   const [user, setUser] = useState({
 
     email: "",
     password: "",
 
   })
-
-
-  const navigate = useNavigate();
-  const [loginStatus,setLogininStatus]=useState(false)
-
 
   const handleChange = e => {
     console.log(e.target);
@@ -47,56 +44,59 @@ const LoginForm = () => {
       [name]: value
     })
   }
-  const userAuthenticated=()=>{ 
-    axios.get("http://localhost:9000/login/isUserAuth",{headers:{
-      "x-access-token":localStorage.getItem("token")        
-    },
-  }
-
-  )
-    .then((response)=>
-    navigate('/workspace')
-    )
-
+  
+  const userAuthenticated = () => {
+    axios.get("http://localhost:9000/login/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token")
+      },
+    })
+      .then((response) =>
+        navigate('/workspace')
+      )
   }
 
   const login = () => {
     axios.post("http://localhost:9000/login", user)
-    .then((res)=>{
-      if(!res.data.auth){
-        setLogininStatus(false)
-      }
-      else{
-        localStorage.setItem("token",res.data.token)
-        localStorage.setItem("userinfo",res.data.result)
-        setLogininStatus(true)
-        userAuthenticated()
-        console.log('getting payload')
-        getPayload(res.data.result)
-        
-      }
-    })
+      .then((res) => {
+        if (!res.data.auth) {
+          setLogininStatus(false)
+        }
+        else {
+          saveData(res)
+        }
+      })
   }
-   
-  const getPayload=(userId)=>{
 
-    axios.get('http://localhost:9000/getData',{params:{
-      userId:userId
-    }})
-    .then((res)=>{
-      console.log(res)
-      const payloadData=res.data
-      Dispatch(addPayload(payloadData))
-
-    })
+  const saveData = (res) => {
+    localStorage.setItem("token", res.data.token)
+    localStorage.setItem("userinfo", res.data.result)
+    setLogininStatus(true)
+    getPayload(res.data.result)
   }
 
 
- 
+  const getPayload = (userId) => {
+
+    axios.get('http://localhost:9000/getData', {
+      params: {
+        userId: userId
+      }
+    })
+      .then((res) => {
+        console.log(res)
+        const payloadData = res.data
+        Dispatch(addPayload(payloadData))
+        navigate('/workspace')
+      })
+  }
+
+
+
 
 
   return (
-  
+
     <BoxContainer>
       <FormContainer>
         <Input type="email" name="email" value={user.email} placeholder="Email" onChange={handleChange} />
@@ -114,7 +114,7 @@ const LoginForm = () => {
           Signup
         </BoldLink>
       </MutedLink>
-      
+
     </BoxContainer>
   );
 }

@@ -23,8 +23,8 @@ const Descriptionvalue = (e) => {
                 <span className='ques_no'>{questionNumber}.</span>
                 <input type="text" className='input-ques' placeholder="Enter Question Text" onChange={Questionvalue} />
                 <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" onChange={Descriptionvalue}/>
-                <PhoneInput width="100" className="phone"  defaultCountry="PAK" placeholder="Enter phone number" value={value} onChange={setValue}/>
-                
+                <PhoneInput disabled width="100" className="phone"  defaultCountry="PAK" placeholder="Enter phone number" value={value} onChange={setValue}/>
+    
                 <Button style={{marginTop:"30px", marginLeft:"40px", padding:"8px", fontSize:"18px", color:"#68c5c5", borderColor:"#68c5c5"}} variant="outlined">Ok</Button>
           </div>
     </div>

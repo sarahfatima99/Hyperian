@@ -5,6 +5,7 @@ import {useSpring,animated } from "react-spring";
 import styled from "styled-components";
 import axios, { Axios } from "axios";
 import {  useNavigate } from 'react-router-dom';
+import Form from './Form';
 
 
 const Background = styled.div`
@@ -21,7 +22,7 @@ z-index:200;
 `
 
 const ModalWrapper = styled.div`
-width:450px;
+width:600px;
 height:400px;
 box-shadow: 0 5px 16px rgba(0,0,0,0.2);
 background: #ffff;
@@ -46,14 +47,11 @@ z-index:200;
  
 const FormModal = ({showModal,setShowModal}) =>{
     const navigate = useNavigate();
-    const [formDetails, setFormDetails]=useState({
-        title:"",
-        details:""
-    })
+    const [formDetails, setFormDetails]=useState({title:"",details:""})
     
     const handleChange = e => {
       
-        console.log(formDetails)
+        
         const {
           name,
           value   
@@ -73,6 +71,7 @@ const FormModal = ({showModal,setShowModal}) =>{
         opacity: showModal ? 1 : 0,
         transform: showModal ? `translateY(0%)` : `translateY(-100%)`
     });
+  
 
     const submitForm =()=>{
 
@@ -82,15 +81,16 @@ const FormModal = ({showModal,setShowModal}) =>{
             formDetails
 
         }
-            console.log(formPayload)
+            
             axios.post("http://localhost:9000/form", formPayload)
             .then((res)=>{
                 if (res.data.success==1){
                     localStorage.setItem("formInfo",res.data.form_id)
-                    navigate('/formpage')
+                    navigate('/formpage',{state:{title:formDetails.title,description:formDetails.details}})
                 }
                 else{
                     console.log(res.data.message)
+                    
                 }
 
             })
@@ -125,7 +125,7 @@ const FormModal = ({showModal,setShowModal}) =>{
                     </div>
                 </div>
                 <div className='container mt-4 text-align-center'>
-                  <button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}} onClick={submitForm} >Create</button>
+                  <button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}} onClick={(event)=> { submitForm()  }} >Create</button>
                     </div>
             </div>
         <CloseModalButton aria-label='Close Modal' onClick={() =>{ setShowModal(prev => !prev)}}/>
