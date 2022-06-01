@@ -71,7 +71,9 @@ const FormModal = ({showModal,setShowModal}) =>{
         opacity: showModal ? 1 : 0,
         transform: showModal ? `translateY(0%)` : `translateY(-100%)`
     });
-  
+  const func = () =>{
+    navigate('/formpage',{state:{title:formDetails.title,description:formDetails.details}})
+  }
 
     const submitForm =()=>{
 
@@ -125,7 +127,7 @@ const FormModal = ({showModal,setShowModal}) =>{
                     </div>
                 </div>
                 <div className='container mt-4 text-align-center'>
-                  <button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}} onClick={(event)=> { submitForm()  }} >Create</button>
+                  <button  style={{backgroundColor:"#39cc83",color:"black",border:"none",borderRadius:"5px",width:"auto",padding:"8px"}} onClick={(event)=> { submitForm(); func();  }} >Create</button>
                     </div>
             </div>
         <CloseModalButton aria-label='Close Modal' onClick={() =>{ setShowModal(prev => !prev)}}/>
