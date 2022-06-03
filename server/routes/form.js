@@ -89,8 +89,10 @@ router.post('/question', (req, res) => {
         '${questionDescription}',
         '${formId}')            
         `
+        console.log('hi')
         request.query(query2)
-            .then(function (recordset) {
+            .then(function (recordset,err) {
+                console.log(err)
                 if (options == true) {
                     optionsList = formQuestions[i]['elements'][0].optionsList
                     console.log('inside if')

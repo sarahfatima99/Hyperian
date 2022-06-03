@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import FormModal from './../../components/FormFields/FormModal'
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Workspace = () => {
   const [showModal, setshowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(true);
   const payload = useSelector(state => state.Payload.payload)
-  console.log(payload.form)
+  const location = useLocation()
+  const dataPresence=location.state.data
+  
+  if (dataPresence===false){
+    payload.form=''
+  }
   const openModal = () => {
     console.log(payload.form)
     setshowModal(prev => !prev);
@@ -34,7 +39,7 @@ export const Workspace = () => {
                         <h5 class="card-title">{item.name}</h5>
                         <p class="card-text">Number of responses</p>
                         <NavLink to={"/viewfrom"}
-                          state={{ item:item }}
+                          state={{ item: item }}
                           class=""
                           style={{
                             color: "black"

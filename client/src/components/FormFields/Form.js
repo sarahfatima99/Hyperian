@@ -38,7 +38,7 @@ const formId=localStorage.getItem('formInfo')
 const Form = () => {
   const location = useLocation();
   console.log(location.state)
-  const question=location.state.item.question
+  // const question=location.state.item.question
   // const formTitle = location.state.title;
 
   const formTitle=''

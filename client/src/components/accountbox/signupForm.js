@@ -57,8 +57,8 @@ const  SignupForm=()=> {
          if(res.data.id){
            console.log(res.data.id)
          }
-       })
-       navigate('/')
+       }) 
+       navigate('/workspace',{state:{data:false }})
       }
       else{
         alert("invalid input")
