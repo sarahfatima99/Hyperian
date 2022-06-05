@@ -34,7 +34,7 @@ const LoginForm = () => {
   })
 
   const handleChange = e => {
-    console.log(e.target);
+ 
     const {
       name,
       value
@@ -46,16 +46,16 @@ const LoginForm = () => {
     })
   }
   
-  const userAuthenticated = () => {
-    axios.get("http://localhost:9000/login/isUserAuth", {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      },
-    })
-      .then((response) =>
-        navigate('/workspace')
-      )
-  }
+  // const userAuthenticated = () => {
+  //   axios.get("http://localhost:9000/login/isUserAuth", {
+  //     headers: {
+  //       "x-access-token": localStorage.getItem("token")
+  //     },
+  //   })
+  //     .then((response) =>
+  //       navigate('/workspace')
+  //     )
+  // }
 
   const login = () => {
     axios.post("http://localhost:9000/login", user)
@@ -85,7 +85,8 @@ const LoginForm = () => {
       }
     })
       .then((res) => {
-        console.log(res)
+      
+
         const payloadData = res.data
         if (payloadData!=null){
           data=true

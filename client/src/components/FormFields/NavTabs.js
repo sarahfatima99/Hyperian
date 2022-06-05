@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import DialogSelect from './DialogSelect'
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import {
 	TabContent, TabPane, Nav,
 	NavItem, NavLink, Row, Col

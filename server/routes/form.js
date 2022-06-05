@@ -63,6 +63,7 @@ router.post('/question', (req, res) => {
     var options
     var formId = req.body.formId
     var questionValues=[]
+
     for (let i = 0; i < formQuestions.length; i++) {
         console.log(formQuestions[i])
         questionType = formQuestions[i]['elements'][0].name
@@ -89,18 +90,25 @@ router.post('/question', (req, res) => {
         '${questionDescription}',
         '${formId}')            
         `
-        console.log('hi')
+     
         request.query(query2)
-            .then(function (recordset,err) {
-                console.log(err)
+            .then(function (recordset,err) { 
+                if (err)
+                {
+                    console.log(err)
+                }
+                else console.log(recordset)
+             
                 if (options == true) {
                     optionsList = formQuestions[i]['elements'][0].optionsList
-                    console.log('inside if')
+                    console.log('inside if',questionNumber)
                     console.log(optionsList.length, optionsList)
                     questionId = recordset['recordset'][0]['QuestionId']
 
                     for (let j = 0; j < optionsList.length; j++) {
-                        var choice = optionsList[i].choice
+                        console.log('inputting choices')
+                        var choice = optionsList[j].choice
+                        console.log(choice,questionId)
                         const query3 = `
 
                         Insert into [Hyperian].[dbo].[options] 
@@ -126,7 +134,7 @@ router.post('/question', (req, res) => {
             })
             ;
     }
-
+ 
 }
 )
 

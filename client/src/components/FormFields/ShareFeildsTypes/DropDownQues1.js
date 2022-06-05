@@ -1,48 +1,48 @@
-import React,{useState} from 'react'
-import { Dropdown ,DropdownButton} from 'react-bootstrap';
+import React, { useState } from 'react'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
+export default function DropDown({ questionNumber, ques, description, optionsList }) {
 
-export default function DropDown({questionNumber , ques,description, optionsList}) {
-    
-console.log(optionsList)
+  console.log(optionsList)
   return (
-    <div>            
-        <div className=''>
+    <div>
+      <div className=''>
         <span className='ques_no'>{questionNumber}.</span>
-        <input type="text" className='input-ques' value={ques}/>
+        <input type="text" className='input-ques' value={ques} />
         <textarea type="textarea" className='input-ques description' value={description} />
-        <br/>
-       {        
-        
-        //   optionList.map((item, key) => {
-        //     return (
-        //         <div>                                
-        //           <input type="textarea"  className="multi-choice add-option"  />                               
-        //         </div>
-        //         )
-        //         })
-        <Dropdown>
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
-    Select
-  </Dropdown.Toggle>
+        <br />
+        <br />  
 
-  <Dropdown.Menu>
-      {optionsList.map((item,key)=>{
-          return(<>
-            <Dropdown.Item>{item.name}</Dropdown.Item>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">{ques}</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"       
+          label="Age"          
+        >
+        {
+            optionsList.map((item)=>{
+              return(
+                <div>
+                   <MenuItem value={item}>{item}</MenuItem>
 
-          </>)
+                </div>
+              )
+            })
 
-      })}
-    
-
-  </Dropdown.Menu>
-</Dropdown>
         }
-        
-        <br/>
-        
-        </div>
+  
+        </Select>
+      </FormControl>
+
+
+      </div>
     </div>
   )
 }

@@ -57,7 +57,7 @@ function displaylogin(){
 export default () => {
   const [showModal,setShowModal] = useState(false);
 
-
+  localStorage.clear();
   const openModal = () => {
     setShowModal(prev => !prev)
   }
