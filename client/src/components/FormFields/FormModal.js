@@ -87,6 +87,7 @@ const FormModal = ({showModal,setShowModal}) =>{
             axios.post("http://localhost:9000/form", formPayload)
             .then((res)=>{
                 if (res.data.success==1){
+                    console.log(res.data.form_id)
                     localStorage.setItem("formInfo",res.data.form_id)
                     navigate('/formpage',{state:{title:formDetails.title,description:formDetails.details}})
                 }

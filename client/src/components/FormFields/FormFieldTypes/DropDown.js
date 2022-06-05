@@ -27,7 +27,7 @@ export default function DropDown({questionNumber , onQuestionTitleChange,onQuest
             setOptionsList([...optionList,
                         {
 
-                           name: e.target.value
+                           choice: e.target.value
                         }])  
                         onOptionListChange(optionList);           
                         e.target.value = ""
@@ -48,7 +48,7 @@ export default function DropDown({questionNumber , onQuestionTitleChange,onQuest
           optionList.map((item, key) => {
             return (
                 <div>                                
-                  <input type="textarea"  className="multi-choice add-option"    placeholder={item.name} onKeyDown={handleKeyDown} />                               
+                  <input type="textarea"  className="multi-choice add-option"    placeholder={item.choice} onKeyDown={handleKeyDown} />                               
                 </div>
                 )
                 })

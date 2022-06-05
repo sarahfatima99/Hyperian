@@ -4,11 +4,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 
 
-const MultiChoiceQues = ({ questionNumber, ques, description, optionsList }) => {
+export default function SingleChpiceAllVisible({ questionNumber, ques, description, optionsList }) {
 
   return (
     <div>
@@ -27,7 +26,7 @@ const MultiChoiceQues = ({ questionNumber, ques, description, optionsList }) => 
               optionsList.map((item, key) => {
                 return (
                   <div>
-                    <FormControlLabel control={<Checkbox />} value={item} label={item}  />
+                    <FormControlLabel control={<Radio />} value={item} label={item}  />
                   </div>
                 )
 
@@ -40,4 +39,3 @@ const MultiChoiceQues = ({ questionNumber, ques, description, optionsList }) => 
     </div>
   )
 }
-export default MultiChoiceQues;

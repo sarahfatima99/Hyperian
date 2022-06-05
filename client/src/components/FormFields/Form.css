@@ -242,7 +242,7 @@ width: 50%;
 }
 
 .abstract{
-    background-image: url('./backgroundImages/abstract.jpg');
+    background-image: url('./backgroundImages/abstract.png');
     background-repeat: no-repeat;
     background-size: 895px 600px;
 }
@@ -253,7 +253,7 @@ width: 50%;
     background-size: 895px 600px;
 }
 .orange{
-    background-image: url('./backgroundImages/orange.jpg');
+    background-image: url('./backgroundImages/orange.png');
     background-repeat: no-repeat;
     background-size: 895px 600px;
 }
@@ -261,9 +261,29 @@ width: 50%;
     background-image: url('./backgroundImages/pink.jpg');
     background-repeat: no-repeat;
     background-size: 895px 600px;
+
 }
-.basic{
-    background-image: url('./backgroundImages/basic.jpg');
-    background-repeat: no-repeat;
-    background-size: 895px 600px
+.basic .input-ques::placeholder{
+    color:rgb(23, 41, 95)
+}
+
+.pink .input-ques::placeholder{
+  
+    color: black;
+    }
+
+.orange .input-ques::placeholder{
+    color: sienna;
+}
+
+.nightscape .input-ques::placeholder{
+    color: rgba(61, 30, 30, 0.836);
+}
+
+.plainblue .input-ques::placeholder{
+    color: rgb(12, 56, 77);
+}
+
+.abstract .input-ques::placeholder{
+    color: rgb(208, 216, 219);
 }

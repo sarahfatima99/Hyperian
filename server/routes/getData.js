@@ -55,31 +55,35 @@ router.get('/', async (req, res) => {
                     }
 
 
-                    found = payload.form[index].question.some(el => el.questionId === data[i].QuestionId)
-                    payload.form[index].question.push({
-                        'qid': data[i].QuestionId
-                        , 'questionNumber': data[i].questionNumber
-                        , 'questionDetail': data[i].questionDetail
-                        , 'questionText': data[i].QuestionId
-                        , 'QuestionType': data[i].QuestionType
-                    })
-
+                    var find = payload.form[index].question.some(el => el.qid === data[i].QuestionId)
+                    console.log(find)
+                    if (!find){
+                        payload.form[index].question.push({
+                            'qid': data[i].QuestionId
+                            , 'questionNumber': data[i].questionNumber
+                            , 'questionDetail': data[i].questionDetail
+                            , 'questionText': data[i].questionText
+                            , 'QuestionType': data[i].QuestionType
+                        })
+                    }
+                   
                     const qindex = payload.form[index].question.length - 1
-                    if (data[i].AnswerText != null) {
+                    if (data[i].AnswerText != null ) {
+
                         if (!payload.form[index].question[qindex].options) {
                             payload.form[index].question[qindex].options = []
                         }
                         payload.form[index].question[qindex].options.push(data[i].AnswerText)
+                        
                     }
 
                 }
             }
         }
-        console.log(payload)
+       
     })
     await sleep(1000);
 
-    console.log(payload)
     res.send(payload)
 
 })

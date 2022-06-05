@@ -35,6 +35,7 @@ router.post("/", (req, res) => {
                     }
 
                     else {
+                        console.log(recordset['recordset'][0]['ID'])
                         res.send({ message: "user registered", user_id: recordset['recordset'][0]['ID'] })
                     }
                 });

@@ -32,7 +32,7 @@ const  SignupForm=()=> {
   const { switchToSignin } = useContext(AccountContext);
 
   const handleChange = e => {
-    console.log(e.target);
+
     const {
       name,
       value
@@ -54,11 +54,12 @@ const  SignupForm=()=> {
       if(name && email && password && (password==reEnterPassword)){
         axios.post("http://localhost:9000/register",user)
        .then(res => {
-         if(res.data.id){
-           console.log(res.data.id)
+         if(res.data.user_id){
+          localStorage.setItem("userinfo", res.data.user_id)
+
          }
-       })
-       navigate('/')
+       }) 
+       navigate('/workspace',{state:{data:false }})
       }
       else{
         alert("invalid input")

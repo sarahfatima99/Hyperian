@@ -5,8 +5,7 @@ const ViewForm = () => {
 
   const location=useLocation()
   const details=location.state.item
-  // const details=' '
-  console.log(details)
+  
 
   return (
       <>

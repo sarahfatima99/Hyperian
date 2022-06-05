@@ -108,8 +108,10 @@ const NewForm = ({ formTitle, formDescription }) => {
 
   const saveForm = () => {
 
+    const formId = localStorage.getItem('formInfo')
 
 
+    
     axios.post("http://localhost:9000/form/question", { pages: defaultJson['Pages'], formId: formId })
       .then((res) => {
       navigate("/createform")
@@ -117,9 +119,6 @@ const NewForm = ({ formTitle, formDescription }) => {
       })
   }
 
-  const toggle = tab => {
-    if (currentActiveTab !== tab) setCurrentActiveTab(tab);
-  }
   const handleSelect = (e) => {
 
 
@@ -129,7 +128,7 @@ const NewForm = ({ formTitle, formDescription }) => {
         ...formType,
         {
           field_type: e,
-          field_jsx: <SingleLineQues questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
+          field_jsx: <SingleLineQues textcolor={"Pink"} questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)}  />,
           color: "pink"
         },
       ]);
@@ -191,7 +190,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "yellow"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:false }] })
 
     } else if (e == "Slider") {
       SetFormType([
@@ -202,7 +201,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#32a889"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:false}] })
 
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
@@ -213,7 +212,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#8988a8"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true}] })
 
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
@@ -224,7 +223,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#a89888"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:true }] })
 
     } else if (e == "Picture Choice") {
       SetFormType([
@@ -235,7 +234,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#b37978"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true}] })
 
     } else if (e == "Yes/No") {
       SetFormType([
@@ -634,7 +633,11 @@ const PreviousForm = ({ question }) => {
 
 
     
-    axios.post("http://localhost:9000/form/question", { pages: dJson['Pages'], formId: formId })
+   
+
+    const formId = localStorage.getItem('formInfo')
+
+    axios.post("http://localhost:9000/form/question", { pages: defaultJson['Pages'], formId: formId })
       .then((res) => {
         alert("Form Successfully Saved")
         navigate("/createform")
@@ -646,7 +649,7 @@ const PreviousForm = ({ question }) => {
   question["question"].map((item) => {
     
 
-    if (item.questionType == "Single Line text") {
+    if (item.QuestionType == "Single Line text") {
 
       ite = [
         ...ite,
@@ -659,7 +662,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
 
 
-    } else if (item.questionType == "Multiple Choice") {
+    } else if (item.QuestionType == "Multiple Choice") {
       ite = [
         ...ite,
         {
@@ -671,7 +674,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, optionsList: [item.options], options: true }] })
 
     }
-    else if (item.questionType == "Website") {
+    else if (item.QuestionType == "Website") {
       ite = [
         ...ite,
         {
@@ -683,7 +686,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
 
     }
-    else if (item.questionType == "Phone") {
+    else if (item.QuestionType == "Phone") {
       ite = [
         ...ite,
         {
@@ -694,7 +697,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Email") {
+    } else if (item.QuestionType == "Email") {
       ite = [
         ...ite,
         {
@@ -705,7 +708,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Multi Line text") {
+    } else if (item.QuestionType == "Multi Line text") {
       ite = [
         ...ite,
         {
@@ -716,7 +719,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Slider") {
+    } else if (item.QuestionType == "Slider") {
       ite = [
         ...ite,
         {
@@ -727,7 +730,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Drop Down (Single Choice)") {
+    } else if (item.QuestionType == "Drop Down (Single Choice)") {
       ite = [
         ...ite,
         {
@@ -738,7 +741,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Drop Down (Multi Choice)") {
+    } else if (item.QuestionType == "Drop Down (Multi Choice)") {
       ite = [
         ...ite,
         {
@@ -749,7 +752,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Picture Choice") {
+    } else if (item.QuestionType == "Picture Choice") {
       ite = [
         ...ite,
         {
@@ -760,7 +763,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Yes/No") {
+    } else if (item.QuestionType == "Yes/No") {
       ite = [
         ...ite,
         {
@@ -771,7 +774,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Ratings") {
+    } else if (item.QuestionType == "Ratings") {
       ite = [
         ...ite,
         {
@@ -784,7 +787,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "File Upload") {
+    } else if (item.QuestionType == "File Upload") {
       ite = [
         ...ite,
         {
@@ -795,7 +798,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.questionType == "Date") {
+    } else if (item.QuestionType == "Date") {
       ite = [
         ...ite,
         {
