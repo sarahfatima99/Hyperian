@@ -48,14 +48,18 @@ textarea{
 
 .ans-disabled{
   margin-left: 30px;
-  width: 50%;
+  width: 90%;
   height: 70px;
   font-size: 25px;
   border-bottom: 1000px;
- 
+  background-color:#f7dced;
   border-bottom: 2px #c0d1da solid;
 
 
+}
+.ans-disabled::placeholder{
+  color:#369191;
+  padding: 10px;
 }
 
 .ok-button{

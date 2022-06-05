@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 
 
 const MultiChoiceQues = ({questionNumber,ques,description,optionsList}) => {
-  console.log(optionsList)
+  
   return (
     <div>            
         <div className=''>
