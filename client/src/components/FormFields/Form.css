@@ -65,6 +65,8 @@
   
 }
 
+
+
   .side-bar-content{
       cursor: pointer;
       font-size:20px;
@@ -263,27 +265,215 @@ width: 50%;
     background-size: 895px 600px;
 
 }
+
+.galaxy{
+    background-image: url('./backgroundImages/galaxy.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+
+}
+
+.goldBlack{
+    background-image: url('./backgroundImages/goldblack.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+
+}
+
+.plainPink{
+   background-image: url('./backgroundImages/plain pink.png');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+
+}
+
+.wooden{
+    background-image: url('./backgroundImages/wooden.jpg');
+    background-repeat: no-repeat;
+    background-size: 895px 600px;
+
+}
+
+
+.wooden .input-ques::placeholder{
+    color:white
+}
+
+
+.wooden .input-ques{
+    color:white
+}
+
+
+
+.plainPink .input-ques::placeholder{
+    color:black
+}
+
+
+.plainPink .input-ques{
+    color:black
+}
+
+.goldBlack .input-ques::placeholder{
+    color:white
+}
+
+.goldBlack .input-ques{
+    color:white
+}
+
+.galaxy .input-ques::placeholder{
+    color:white
+}
+
+.galaxy .input-ques{
+    color:white
+}
+
 .basic .input-ques::placeholder{
     color:rgb(23, 41, 95)
 }
 
-.pink .input-ques::placeholder{
-  
+.basic .input-ques{
+    color:rgb(23, 41, 95)
+}
+
+.pink .input-ques::placeholder
+{  
     color: black;
-    }
+    
+}
+.pink .input-ques
+{
+  
+ color: black;
+        
+}
+    
+
+
 
 .orange .input-ques::placeholder{
+    color: sienna;
+}
+
+.orange .input-ques{
     color: sienna;
 }
 
 .nightscape .input-ques::placeholder{
     color: rgba(61, 30, 30, 0.836);
 }
+.nightscape .input-ques{
+    color: rgba(61, 30, 30, 0.836);
+}
+
 
 .plainblue .input-ques::placeholder{
     color: rgb(12, 56, 77);
 }
 
-.abstract .input-ques::placeholder{
+
+.plainblue .input-ques{
+    color: rgb(12, 56, 77);
+}
+
+.abstract   .input-ques::placeholder{
     color: rgb(208, 216, 219);
+}
+
+.abstract   .input-ques{
+    color: rgb(208, 216, 219);
+}
+
+.sidebar-card{
+    padding:  70px 30px;
+    cursor: pointer;
+    border: 3px;
+    margin: 30px;
+    border-radius: 20px;
+}
+
+.logic-design-side-bar{
+   overflow-y: scroll;
+   overflow-x:hidden ;
+}
+
+.card-item-name{
+  bottom: 0;
+  top:70px;
+  border-radius: 0 0 20px ;
+  border-style: solid;
+  border-top: 2px;
+  left: -30px;
+  text-align: center;
+  padding-bottom: 40px;
+  width: 310px;
+  padding-right: 20px;
+  background-color: aliceblue;
+  position: relative;
+}
+
+.itemh1{
+    font-size: 20px;
+    padding-top: 20px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.abstract-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/AbstractCard.png');
+}
+
+.nightscape-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/nightscapeCard.png');
+}
+.plainblue-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/plainblueCard.png');
+}
+.plainPink-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/plainpinkCard.png');
+}
+.wooden-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/woodenCard.png');
+}
+.pink-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/pinkCard.png');
+}
+.orange-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/orangeCard.png');
+}
+.galaxy-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/galaxyCard.png');
+}
+.goldBlack-card{
+    background-repeat: no-repeat;
+    background-size: 495px 400px;
+    background-image: url('./cards/goldblackCard.png');
+}
+.themeheading{
+    text-align: center;
+    font-size: 25px;
+    border-radius: 10px;
+    margin: 10px 20px;
+    background-color:rgb(119, 184, 135);;
+    padding: 15px 0;
+    color: white;
 }

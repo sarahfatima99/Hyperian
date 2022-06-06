@@ -31,13 +31,14 @@ import {
 import ShareForm from "./ShareForm";
 import Website from "./FormFieldTypes/Website";
 import { Button } from "react-bootstrap";
+import { listItemButtonClasses } from "@mui/material";
 
 var defaultJson = [];
 defaultJson.Pages = [];
-
+const themeList = ['None', 'plainblue', 'abstract', 'nightscape', 'orange', 'pink', 'galaxy', 'goldBlack', 'plainPink', 'wooden']
 const NewForm = ({ formTitle, formDescription }) => {
 
-
+  const [theme, setTheme] = useState('None')
   const [activeFormType, setActiveFormType] = useState()
   const [formType, SetFormType] = useState([]);
   const [currentActiveTab, setCurrentActiveTab] = useState('1');
@@ -47,7 +48,7 @@ const NewForm = ({ formTitle, formDescription }) => {
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionDescription, setQuestionDescription] = useState('');
   const [active, setActive] = useState(true);
-  const[textColor,setTextColor]=useState('black')
+  const [textColor, setTextColor] = useState('black')
 
   const onChangeQuestionTitle = (len, e) => {
     setQuestionTitle(e);
@@ -96,7 +97,7 @@ const NewForm = ({ formTitle, formDescription }) => {
 
 
     console.log(defaultJson)
-    axios.post("http://localhost:9000/form/question", { pages: defaultJson['Pages'], formId: formId })
+    axios.post("http://localhost:9000/form/question", { pages: defaultJson['Pages'], formId: { formId }, formTheme: { theme } })
       .then((res) => {
         console.log(res)
 
@@ -105,14 +106,13 @@ const NewForm = ({ formTitle, formDescription }) => {
 
   const handleSelect = (e) => {
 
-
     if (e == "Single Line text") {
 
       SetFormType([
         ...formType,
         {
           field_type: e,
-          field_jsx: <SingleLineQues textcolor={textColor} questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)}  />,
+          field_jsx: <SingleLineQues textcolor={textColor} questionNumber={formType.length + 1} onQuestionTitleChange={(e) => onChangeQuestionTitle(formType.length, e)} onQuestionDescriptionChange={(e) => onChangeQuestionDescription(formType.length, e)} />,
           color: "pink"
         },
       ]);
@@ -174,7 +174,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "yellow"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:false }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (e == "Slider") {
       SetFormType([
@@ -185,7 +185,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#32a889"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:false}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
@@ -196,7 +196,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#8988a8"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
 
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
@@ -207,7 +207,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#a89888"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:true }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
 
     } else if (e == "Picture Choice") {
       SetFormType([
@@ -218,7 +218,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#b37978"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
 
     } else if (e == "Yes/No") {
       SetFormType([
@@ -463,7 +463,7 @@ const NewForm = ({ formTitle, formDescription }) => {
 
                     </div>
 
-                    <div className={`column form-content ${background}`}>
+                    <div className={`column form-content ${theme}`}>
 
                       {activeFormType}
                     </div>
@@ -473,89 +473,40 @@ const NewForm = ({ formTitle, formDescription }) => {
 
               <div className="col-lg-3" style={{ height: "700px" }}>
                 <div className="logic-design-side-bar">
-                  <Nav tabs>
-                    <NavItem>
-
-                    </NavItem>
-
-                  </Nav>
+                  <div className="themeheading">
+                    <h5 >Themes and design</h5>
+                    
+                  </div>
                   <TabContent activeTab={currentActiveTab}>
                     <TabPane tabId="1">
                       <Row>
                         <Col sm="12">
                           <ul>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('basic')
-                                }
-                              } >
-                                basic
-                              </button>
-                            </li>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('plainblue')
-                                }
-                              }>
-                                plain blue
-                              </button>
-                            </li>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('pink')
-                                }
-                              }>
-                                pink
-                              </button >
-                            </li>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('orange')
-                                }
-                              }>
-                                orange
-                              </button>
-                            </li>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('nightscape')
-                                }
-                              }>
-                                night scape
-                              </button>
-                            </li>
-                            <li>
-                              <button onClick={
-                                () => {
-                                  setBackground('abstract')
-                                }
-                              }>
-                                abtstract
-                              </button>
-                            </li>
-                            <li>
-                              <button>
-                                fractal
-                              </button>
-                            </li>
+                            {
+                              themeList.map((item, key) => {
+                                return (
+                                  <li>
+                                    <div className={`${item}-card sidebar-card`} onClick={
+                                      () => {
+                                        setTheme(item)
+
+                                      }
+                                    } >
+                                      <div className="card-item-name">
+
+                                        <h1 className="itemh1">  {item}
+                                        </h1>
+                                      </div>
+                                    </div>
+                                  </li>
+                                )
+                              })
+                            }
                           </ul>
                         </Col>
                       </Row>
                     </TabPane>
-                    <TabPane tabId="2">
-                      <Row>
-                        <Col sm="12">
-                          <label for="cars">Choose rating type:</label>
 
-
-                        </Col>
-                      </Row>
-                    </TabPane>
                   </TabContent>
 
                 </div>
@@ -573,7 +524,7 @@ const NewForm = ({ formTitle, formDescription }) => {
 const PreviousForm = ({ question }) => {
 
 
-  
+
   const [activeFormType, setActiveFormType] = useState()
   const [currentActiveTab, setCurrentActiveTab] = useState('1');
   const [background, setBackground] = useState('')
@@ -710,7 +661,7 @@ const PreviousForm = ({ question }) => {
           color: "yellow"
         },
       ];
-      defaultJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.QuestionType, questionNumber: item.questionNumber, questiontitle: "", questionDescription: "" , options: false}] })
+      defaultJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.QuestionType, questionNumber: item.questionNumber, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (item.QuestionType == "Slider") {
       ite = [
@@ -721,7 +672,7 @@ const PreviousForm = ({ question }) => {
           color: "#32a889"
         },
       ];
-      defaultJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.QuestionType, questionNumber: item.questionNumber, questiontitle: "", questionDescription: "" , options: false}] })
+      defaultJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.QuestionType, questionNumber: item.questionNumber, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (item.QuestionType == "Drop Down (Single Choice)") {
       ite = [
@@ -806,7 +757,7 @@ const PreviousForm = ({ question }) => {
     }
   })
 
-  const [formType, SetFormType ] = useState(ite);
+  const [formType, SetFormType] = useState(ite);
 
 
   const toggle = tab => {
@@ -897,7 +848,7 @@ const PreviousForm = ({ question }) => {
           color: "#32a889"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" , options: false}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
@@ -908,7 +859,7 @@ const PreviousForm = ({ question }) => {
           color: "#8988a8"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" , options: true}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
 
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
@@ -930,7 +881,7 @@ const PreviousForm = ({ question }) => {
           color: "#b37978"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" , options: true}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
 
     } else if (e == "Yes/No") {
       SetFormType([
@@ -965,7 +916,7 @@ const PreviousForm = ({ question }) => {
           color: "#523a63"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" , options: false}] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
 
     } else if (e == "Date") {
       SetFormType([
@@ -1121,7 +1072,7 @@ const PreviousForm = ({ question }) => {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}>
                                     {formType.map((item, key) => {
-                                      
+
                                       return (
                                         <>
                                           <Draggable
@@ -1289,7 +1240,7 @@ const Form = () => {
   const location = useLocation();
   if (location.state.item) {
     question = location.state.item;
-    
+
     return (<>
       <PreviousForm question={question} />
     </>)

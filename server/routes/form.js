@@ -10,6 +10,7 @@ app.use(cors())
 app.use(express.urlencoded())
 
 router.post('/', (req, res) => {
+
     var request = new sql.sql.Request()
     const userId = req.body.userId;
     const formTitle = req.body.formDetails.title
@@ -61,8 +62,22 @@ router.post('/question', (req, res) => {
     var questionId
     var optionsList = []
     var options
-    var formId = req.body.formId
+    var formId = req.body.formId.formId
+    var formTheme=req.body.formTheme.theme
     var questionValues=[]
+    console.log(formTheme,formId)
+    const query=
+    `
+    update [Hyperian].[dbo].[FormDetails] set formTheme='${formTheme}' where FormId='${formId}'`
+
+    request.query(query,function(err,recordset){
+        if (err)
+        console.log(err)
+        else{
+            console.log('done')
+        }
+
+    })
 
     for (let i = 0; i < formQuestions.length; i++) {
         console.log(formQuestions[i])
