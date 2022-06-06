@@ -594,7 +594,7 @@ dJson.Pages = [];
 
 
 const PreviousForm = ({ question }) => {
-
+  console.log("Questions",question)
 
   const navigate = useNavigate()
   const [activeFormType, setActiveFormType] = useState()
@@ -630,13 +630,7 @@ const PreviousForm = ({ question }) => {
   };
 
   const saveForm = () => {
-
-
-    
-   
-
     const formId = localStorage.getItem('formInfo')
-
     axios.post("http://localhost:9000/form/question", { pages: defaultJson['Pages'], formId: formId })
       .then((res) => {
         alert("Form Successfully Saved")
@@ -647,10 +641,11 @@ const PreviousForm = ({ question }) => {
   var ite = [];
 
   question["question"].map((item) => {
+    console.log(item)
     
 
-    if (item.QuestionType == "Single Line text") {
-
+    if (item.questionType == "Single Line text") {
+        console.log("IAM HERE")
       ite = [
         ...ite,
         {
@@ -662,7 +657,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
 
 
-    } else if (item.QuestionType == "Multiple Choice") {
+    } else if (item.questionType == "Multiple Choice") {
       ite = [
         ...ite,
         {
@@ -674,7 +669,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, optionsList: [item.options], options: true }] })
 
     }
-    else if (item.QuestionType == "Website") {
+    else if (item.questionType == "Website") {
       ite = [
         ...ite,
         {
@@ -686,7 +681,7 @@ const PreviousForm = ({ question }) => {
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
 
     }
-    else if (item.QuestionType == "Phone") {
+    else if (item.questionType == "Phone") {
       ite = [
         ...ite,
         {
@@ -697,7 +692,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Email") {
+    } else if (item.questionType == "Email") {
       ite = [
         ...ite,
         {
@@ -708,7 +703,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Multi Line text") {
+    } else if (item.questionType == "Multi Line text") {
       ite = [
         ...ite,
         {
@@ -719,7 +714,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Slider") {
+    } else if (item.questionType == "Slider") {
       ite = [
         ...ite,
         {
@@ -730,7 +725,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Drop Down (Single Choice)") {
+    } else if (item.questionType == "Drop Down (Single Choice)") {
       ite = [
         ...ite,
         {
@@ -741,7 +736,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Drop Down (Multi Choice)") {
+    } else if (item.questionType == "Drop Down (Multi Choice)") {
       ite = [
         ...ite,
         {
@@ -752,7 +747,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Picture Choice") {
+    } else if (item.questionType == "Picture Choice") {
       ite = [
         ...ite,
         {
@@ -763,7 +758,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Yes/No") {
+    } else if (item.questionType == "Yes/No") {
       ite = [
         ...ite,
         {
@@ -774,7 +769,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Ratings") {
+    } else if (item.questionType == "Ratings") {
       ite = [
         ...ite,
         {
@@ -787,7 +782,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "File Upload") {
+    } else if (item.questionType == "File Upload") {
       ite = [
         ...ite,
         {
@@ -798,7 +793,7 @@ const PreviousForm = ({ question }) => {
       ];
       dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
 
-    } else if (item.QuestionType == "Date") {
+    } else if (item.questionType == "Date") {
       ite = [
         ...ite,
         {
@@ -1331,6 +1326,7 @@ const Form = () => {
   const location = useLocation();
   if (location.state.item) {
     question = location.state.item;
+    console.log(question);
     
     return (<>
       <PreviousForm question={question} />
