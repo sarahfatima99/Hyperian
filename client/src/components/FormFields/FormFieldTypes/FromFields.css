@@ -52,10 +52,13 @@ textarea{
   height: 70px;
   font-size: 25px;
   border-bottom: 1000px;
- 
   border-bottom: 2px #c0d1da solid;
 
 
+}
+.ans-disabled::placeholder{
+    
+  padding: 10px;
 }
 
 .ok-button{

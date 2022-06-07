@@ -9,11 +9,16 @@ import DateQues from "./ShareFeildsTypes/DateQues";
 import PictureChoiceQues from "./ShareFeildsTypes/PictureChoiceQues";
 import FileUploadQues from "./ShareFeildsTypes/FileUploadQues";
 import MultiChoiceQues from "./ShareFeildsTypes/MultiChoiceQues";
+import MultiChoice2 from "./ShareFeildsTypes/MultiChoice2";
 import SliderQues from "./ShareFeildsTypes/SliderQues";
 import RatingQues from "./ShareFeildsTypes/RatingQues"
 import DropDownQues1 from './ShareFeildsTypes/DropDownQues1';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+// import 'react-slideshow-image/dist/styles.css'
+// import { Slide } from 'react-slideshow-image';
+import "./ShareForm.css";
+
 
 const ShareForm = ({ data, formTittle, formDescription }) => {
 
@@ -23,6 +28,7 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
@@ -32,17 +38,13 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
 
 
     var copyText = document.getElementById("myInput");
-    console.log(copyText);
-
-
     copyText.select();
     copyText.setSelectionRange(0, 99999);
-
-
     navigator.clipboard.writeText(copyText.value);
     setCopied(true)
-    navigate("/usershareform", { state: { data: data, formTittle: formTittle, formDescription: formDescription } })
+    navigate("/usershareform", { state: { data: data, formTittle: formTittle, formDescription: formDescription ,theme:data.theme} })
   }
+
 
   return (
     <>
@@ -67,10 +69,11 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
         </div>
 
       </div>
-      <div className='container'>
-        <div className='d-flex flex-column'></div>
-        <h1 className='input-ques' style={{ padding: "10px" }}>Tittle : {formTittle}</h1>
-        <p style={{ padding: "10px" }}>Description: {formDescription}</p>
+      <div className='container' style={{ border: "0.5px solid grey", marginTop: "30px" }}>
+        <div className='d-flex flex-column' >
+          <h1 className='input-ques' style={{ padding: "10px", fontFamily: "sans-serif", color: "", fontSize: "40px" }}>Tittle : {formTittle}</h1>
+          <p style={{ padding: "10px", fontFamily: "sans-serif", color: "", fontSize: "20px" }}>Description : {formDescription}</p>
+        </div>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -86,105 +89,156 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <div style={{ alignItems: "center", padding: "30px" }}>
+      <div style={{ textAlign: "center" }}>
+        {/* <Slide easing="ease" style={{ width: "80%", marginLeft: "140px" }}> */}
+          {data['Pages'].map((item) => {
+
+            if (item.elements[0]['name'] === "Single Line text") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <SingleLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>
+              )
+            }
+            else if (item.elements[0]['name'] === "Multi Line Text") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>
+              )
+            }
+            else if (item.elements[0]['name'] === "Multi Line text") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Email") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <EmailQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Phone") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <PhoneQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Website") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <WebsiteQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Date") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <DateQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Picture Choice") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <PictureChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "File Upload") {
+
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <FileUploadQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+
+                  </div>
+                </div>)
+            }
+
+            else if (item.elements[0]['name'] === "Multiple Choice") {
 
 
-        {data['Pages'].map((item) => {
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <MultiChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
 
-          if (item.elements[0]['name'] === "Single Line text") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <SingleLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Multi Line Text") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Email") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <EmailQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Phone") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <PhoneQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Website") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <WebsiteQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Date") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <DateQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Picture Choice") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <PictureChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "File Upload") {
-
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <FileUploadQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Multiple Choice") {
-
-            console.log(item.elements[0]['optionsList'])
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <MultiChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Slider") {
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Slider") {
 
 
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <SliderQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Ratings") {
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <RatingQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Drop Down (Single Choice)") {
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <DropDownQues1 questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
-              </div>)
-          }
-          else if (item.elements[0]['name'] === "Drop Down (Multi Choice)") {
-            return (
-              <div style={{ border: "2px solid black", marginTop: "10px", padding: "20px" }}>
-                <DropDownQues1 questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
-              </div>)
-          }
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <SliderQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
 
-        })}
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Ratings") {
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <RatingQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
 
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Drop Down (Single Choice)") {
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <DropDownQues1 questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
 
+                  </div>
+                </div>)
+            }
+            else if (item.elements[0]['name'] === "Drop Down (Multi Choice)") {
+              return (
+                <div className="each-slide">
+                  <div className={`${data.theme}`}>
+                    <DropDownQues1 questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
+
+                  </div>
+                </div>)
+            }
+
+          })}
+
+        {/* </Slide> */}
       </div>
     </>
   )

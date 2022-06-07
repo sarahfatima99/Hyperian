@@ -1,0 +1,26 @@
+.each-slide > div {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 600px;
+  }
+  
+  .each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+    border-radius: 10px solid #efefef;
+  }
+  
+
+  .shareformMain{
+    padding-left: 0;
+  margin-left: 50px;
+    margin-top: 100px;
+    border-radius: 40px;
+  }
+
+  

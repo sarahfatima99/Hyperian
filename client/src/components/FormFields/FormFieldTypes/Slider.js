@@ -1,5 +1,5 @@
 import React from 'react'
-import './FromFields.css'
+// import './FromFields.css'
 import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 
@@ -18,7 +18,7 @@ export default function SingleLineQues({questionNumber , onQuestionTitleChange,o
     return (
         <div>
             <div className='form-type container'>
-                <span className='ques_no'>{questionNumber}.</span>
+                <span className='ques_no' style={{background:"transparent",padding:"0"}}>{questionNumber}.</span>
                 <input type="text" className='input-ques' placeholder="Enter Question Text" onChange={Questionvalue} />
                 <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)"onChange={Descriptionvalue} />
                <br/>

@@ -19,12 +19,15 @@ export default function MultichoiceAllVisible({questionNumber , onQuestionTitleC
       onQuestionDescriptionChange(e.target.value);
   }
 
+
     const handleKeyDown=(e)=>
     {    
+        console.log(e);
         if (e.key == 'Enter')
          {
             setCount(prevCount => prevCount + 1)  
-            setOptionsList([...optionList,{choice: e.target.value}])
+             
+            setOptionsList([...optionList,e.target.value])
                         onOptionListChange(optionList);            
                         e.target.value = ""
                         
@@ -43,7 +46,7 @@ export default function MultichoiceAllVisible({questionNumber , onQuestionTitleC
           optionList.map((item, key) => {
             return (
                 <div>                                
-                  <input type="textarea"  className=" multi-choice add-option"   placeholder={item.choice}    onKeyDown={handleKeyDown} />                               
+                  <input type="textarea"  className=" multi-choice add-option"   placeholder={item}    onKeyDown={handleKeyDown} />                               
                 </div>
                 )
                 })

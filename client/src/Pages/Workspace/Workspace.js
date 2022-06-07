@@ -7,14 +7,124 @@ import { useNavigate, useLocation } from 'react-router-dom';
 export const Workspace = () => {
 
 
+  const payload ={ form:[
+    {
+    formId: 1002,
+    name: 'form1',
+    description: 'hello world',
+    question: [{
+      qid: 213,
+      questionNumber: 1,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 214,
+      questionNumber: 2,
+      questionDetail: 'hello world',
+      questionType: "Multiple Choice",
+      questionText: 'ksdalks',
+      options:['1','2','3','4']
+    },
+    {
+      qid: 214,
+      questionNumber: 3,
+      questionDetail: 'hello world',
+      questionType: "Multi Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 215,
+      questionNumber: 4,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    }
+
+    ]
+  },
+  {
+    formId: 1002,
+    name: 'form1',
+    description: 'hello world',
+    question: [{
+      qid: 213,
+      questionNumber: 1,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 214,
+      questionNumber: 2,
+      questionDetail: 'hello world',
+      questionType: "Multiple Choice",
+      questionText: 'ksdalks',
+      options:['1','2','3','4']
+    },
+    {
+      qid: 214,
+      questionNumber: 3,
+      questionDetail: 'hello world',
+      questionType: "Multi Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 215,
+      questionNumber: 4,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    }
+
+    ]
+  },
+  {
+    formId: 1002,
+    name: 'form1',
+    description: 'hello world',
+    question: [{
+      qid: 213,
+      questionNumber: 1,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 214,
+      questionNumber: 2,
+      questionDetail: 'hello world',
+      questionType: "Multiple Choice",
+      questionText: 'ksdalks',
+      options:['1','2','3','4']
+    },
+    {
+      qid: 214,
+      questionNumber: 3,
+      questionDetail: 'hello world',
+      questionType: "Multi Line text",
+      questionText: 'ksdalks'
+    },
+    {
+      qid: 215,
+      questionNumber: 4,
+      questionDetail: 'hello world',
+      questionType: "Single Line text",
+      questionText: 'ksdalks'
+    }
+
+    ]
+  }]}
+
 
 
 
   const [showModal, setshowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(true);
-  const payload = useSelector(state => state.Payload.payload)
+  // const payload = useSelector(state => state.Payload.payload)
 
-  console.log(payload,payload.form.length)
+  // console.log(payload,payload.form.length)
   const openModal = () => {
 
     setshowModal(prev => !prev);
