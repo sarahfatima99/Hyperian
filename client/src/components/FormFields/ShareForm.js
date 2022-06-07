@@ -16,11 +16,12 @@ import DropDownQues1 from './ShareFeildsTypes/DropDownQues1';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 // import 'react-slideshow-image/dist/styles.css'
-// import { Slide } from 'react-slideshow-image';
+import { Slide } from 'react-slideshow-image';
 import "./ShareForm.css";
 
 
 const ShareForm = ({ data, formTittle, formDescription }) => {
+  console.log(data.Pages);
 
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -90,7 +91,7 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
         </Modal.Footer>
       </Modal>
       <div style={{ textAlign: "center" }}>
-        {/* <Slide easing="ease" style={{ width: "80%", marginLeft: "140px" }}> */}
+        <Slide easing="ease" style={{ width: "80%", marginLeft: "140px" }}>
           {data['Pages'].map((item) => {
 
             if (item.elements[0]['name'] === "Single Line text") {
@@ -238,7 +239,7 @@ const ShareForm = ({ data, formTittle, formDescription }) => {
 
           })}
 
-        {/* </Slide> */}
+        </Slide>
       </div>
     </>
   )

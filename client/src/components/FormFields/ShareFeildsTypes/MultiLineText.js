@@ -4,8 +4,10 @@ import React from 'react'
 
 
 
-const  MultiLineText = ({questionNumber, ques,description}) => {
-    console.log(ques);
+const  MultiLineText = ({questionNumber, ques,description,onQuestionAnswerChange}) => {
+    const submitAnswer = (e) =>{
+        onQuestionAnswerChange(e.target.value);
+    }
     return (
         <div>
             <div className=''>
@@ -14,7 +16,7 @@ const  MultiLineText = ({questionNumber, ques,description}) => {
            
                     <textarea type="textarea" disabled className='input-ques description' placeholder="Enter Question Description (optional)" value={description} />
             
-                <input type="textarea"  className='ans-disabled' placeholder="Type your answer" />
+                <input type="textarea"  className='ans-disabled' placeholder="Type your answer" onChange={submitAnswer} />
                 
             </div>
         </div>  

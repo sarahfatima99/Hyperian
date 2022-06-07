@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dropdown } from "reactstrap";
 import "./Form.css";
 import SingleLineText from './ShareFeildsTypes/SingleLineText';
@@ -13,24 +13,35 @@ import MultiChoiceQues from "./ShareFeildsTypes/MultiChoiceQues";
 import SliderQues from "./ShareFeildsTypes/SliderQues";
 import RatingQues from "./ShareFeildsTypes/RatingQues"
 import DropDownQues1 from './ShareFeildsTypes/DropDownQues1';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';
 import "./ShareForm.css";
-
+import { Button } from "react-bootstrap";
+import Response from "../../Pages/Response/Response";
 
 
 
 const UserShareForm = () => {
-
+  const [active,setActive] = useState(null);
   const location = useLocation();
   const formDetail = location.state.data;
+  console.log(location.state.data["Pages"])
+  let navigate  = useNavigate();
   const theme=location.state.theme
-  // const formTitle = location.state.formTittle;
-  // const formDescription = location.state.formDescription;
-  var len = formDetail["Pages"].length;
-  console.log(len)
-var count  = 0;
+
+  const storeResponse = () =>{
+    alert("Your Response has been Submited successfully");
+    var data = location.state.data
+    navigate("/response",{state:{data:data}})
+  }
+  const onChnageQuestionAnswer = (len,e) =>{
+  
+    location.state.data["Pages"][len]["elements"][0]["questionAnswer"] = e;
+    
+    
+  }
+  
   
   return (
     <>
@@ -38,10 +49,7 @@ var count  = 0;
         {location.state.data["Pages"].map((item) => {
          
           if (item.elements[0]["name"] === "Single Line text") {
-              count++;
-              console.log(count)
-              if(count === len)
-              {
+            
                 return(<>
                    <div className="each-slide">
             <div className={`${theme}`}  >
@@ -52,28 +60,13 @@ var count  = 0;
           </div>
 
                 </>)
-              }
-              else{
-                return (
-              
-                  <div className="each-slide">
-                <div  className={`${theme}`} >
-                <SingleLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
-               
-                </div>
-              </div>
-              
-                  )
-
-              }
-         
           }
           else if (item.elements[0]["name"] === "Multi Line Text") {
 
             return (
               <div className="each-slide">
               <div className={`${theme}`}  >
-        <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>)
@@ -83,7 +76,7 @@ var count  = 0;
             return(
               <div className="each-slide">
               <div  className={`${theme}`} >
-        <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <MultiLineText questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>
@@ -95,7 +88,7 @@ var count  = 0;
             return (
               <div className="each-slide">
               <div className={`${theme}`}  >
-        <EmailQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <EmailQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}}/>
      
               </div>
       </div>)
@@ -105,7 +98,7 @@ var count  = 0;
             return (
               <div className="each-slide">
               <div  className={`${theme}`} >
-        <PhoneQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <PhoneQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>)
@@ -115,7 +108,7 @@ var count  = 0;
             return (
               <div className="each-slide">
             <div  className={`${theme}`} >
-      <WebsiteQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+      <WebsiteQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
    
             </div>
     </div>)
@@ -125,7 +118,7 @@ var count  = 0;
             return (
               <div className="each-slide">
             <div className={`${theme}`}  >
-      <DateQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+      <DateQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
    
             </div>
     </div>)
@@ -156,7 +149,7 @@ var count  = 0;
             return (
               <div className="each-slide">
               <div  className={`${theme}`} >
-        <MultiChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} />
+        <MultiChoiceQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} optionsList={item.elements[0]['optionsList']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>)
@@ -167,7 +160,7 @@ var count  = 0;
             return (
               <div className="each-slide">
               <div  className={`${theme}`} >
-        <SliderQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <SliderQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>)
@@ -176,7 +169,7 @@ var count  = 0;
             return (
               <div className="each-slide">
               <div className={`${theme}`}  >
-        <RatingQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} />
+        <RatingQues questionNumber={item.elements[0]['questionNumber']} ques={item.elements[0]['questiontitle']} description={item.elements[0]['questionDescription']} onQuestionAnswerChange={(e)=>{onChnageQuestionAnswer(item.elements[0]['questionNumber']-1,e)}} />
      
               </div>
       </div>)
@@ -199,11 +192,12 @@ var count  = 0;
               </div>
       </div>)
           }
-
+          
         })}
-
-
       </Slide>
+      <div style={{marginTop:"50px",textAlign:"center"}}>
+      <Button onClick={storeResponse} style={{ backgroundColor: "#39cc83", color: "black", border: "none", borderRadius: "5px", width: "auto", padding: "8px" ,margin:"8px" }}>Submit Form</Button>
+      </div>
     </>)
 }
 export default UserShareForm;

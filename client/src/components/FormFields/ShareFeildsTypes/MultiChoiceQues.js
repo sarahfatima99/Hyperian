@@ -6,53 +6,50 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
+import { withStyles } from "@material-ui/core/styles";
 
 
+const MultiChoiceQues = ({ questionNumber, ques, description,onQuestionAnswerChange, optionsList }) => {
 
-const MultiChoiceQues = ({ questionNumber, ques, description, optionsList }) => {
-
+const onChangeValue = (e) =>{
+  onQuestionAnswerChange(e.target.value);
+}
   return (
     <div>
       <div className=''>
-        <span className='ques_no'style={{padding:"0",background:"transparent"}}>{questionNumber}.</span>
-        <input type="text" className='input-ques' placeholder="Enter Question Text" onChange={ques} />
-        <textarea type="textarea" className='input-ques description' placeholder="Enter Question Description (optional)" onChange={description} />
+        <span className='ques_no'>{questionNumber}.</span>
 
-      
+            <input
+          type="text"
+          className="input-ques"
+          value={ques}
+        />
+       <div className='d-flex flex-row align-item-center'>
+                    <textarea style={{paddingTop:"0px" ,marginLeft:"95px",marginTop:"0px"}} type="textarea" disabled className='input-ques description' placeholder="Enter Question Description (optional)" value={description} />
+                </div>
+          {/* <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="radio-buttons-group"
+          > */}
 
-
-        {
-          optionsList.map((item,key)=>{
-            return(
-              <label className="chck">
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-              {item}
-            </label>
-            )
-          })
-        }
-
-        {/* <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">{ques}</FormLabel>
-          <h1>{description}</h1>
-       
             {
               optionsList.map((item, key) => {
                 return (
                   <div>
-
-                    <FormControlLabel control={<Checkbox />} value={item} label={item}  />
+                       <div onChange={onChangeValue}>
+                       <input style={{fontSize:"30px"}} type="radio" value={item} name="gender" />            {item}
+      </div>
                   </div>
                 )
 
               })
             }
-       
-        </FormControl> */}
+         
+        
 
       </div>
     </div>
+    
   )
 }
 export default MultiChoiceQues;

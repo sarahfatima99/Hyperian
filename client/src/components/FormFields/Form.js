@@ -10,6 +10,7 @@ import Email from "./FormFieldTypes/Email";
 import TextMultiLine from "./FormFieldTypes/TextMultiLine";
 import Slider from "./FormFieldTypes/Slider";
 import DropDown from "./FormFieldTypes/DropDown";
+
 import FileUpload from "./FormFieldTypes/FileUpload";
 import Date from "./FormFieldTypes/Date";
 import Ratings from "./FormFieldTypes/Ratings";
@@ -132,7 +133,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "pink"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: '', questionDescription: '', options: false }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: '', questionDescription: '', options: false,questionAnswer: "" }] })
 
 
     } else if (e == "Multiple Choice") {
@@ -144,7 +145,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "orange"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", optionsList: [], options: true }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", optionsList: [], options: true ,questionAnswer: ""}] })
 
     }
     else if (e == "Website") {
@@ -156,7 +157,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "orange"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false,questionAnswer: "" }] })
 
     }
     else if (e == "Phone") {
@@ -168,7 +169,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#8b94d9"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Email") {
       SetFormType([
@@ -179,7 +180,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#bcc466"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Multi Line Text") {
       SetFormType([
@@ -190,7 +191,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "yellow"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:false,questionAnswer: "" }] })
 
     } else if (e == "Slider") {
       SetFormType([
@@ -201,7 +202,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#32a889"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:false,questionAnswer: ""}] })
 
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
@@ -212,7 +213,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#8988a8"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true,questionAnswer: ""}] })
 
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
@@ -223,7 +224,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#a89888"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",options:true,questionAnswer: "" }] })
 
     } else if (e == "Picture Choice") {
       SetFormType([
@@ -234,7 +235,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#b37978"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: true }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,options:true,questionAnswer: ""}] })
 
     } else if (e == "Yes/No") {
       SetFormType([
@@ -245,7 +246,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#b37899"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Ratings") {
       SetFormType([
@@ -258,7 +259,7 @@ const NewForm = ({ formTitle, formDescription }) => {
 
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "File Upload") {
       SetFormType([
@@ -269,7 +270,7 @@ const NewForm = ({ formTitle, formDescription }) => {
           color: "#523a63"
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Date") {
       SetFormType([
@@ -281,7 +282,7 @@ const NewForm = ({ formTitle, formDescription }) => {
 
         },
       ]);
-      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }], options: false })
+      defaultJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,questionAnswer: "",options:false}] })
 
     }
 
@@ -605,7 +606,7 @@ const PreviousForm = ({ question }) => {
           color: "pink"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false,questionAnswer: "" }] })
 
 
     } else if (item.questionType == "Multiple Choice") {
@@ -617,7 +618,7 @@ const PreviousForm = ({ question }) => {
           color: "orange"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, optionsList: [item.options], options: true }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, optionsList: [item.options], options: true,questionAnswer: "" }] })
 
     }
     else if (item.questionType == "Website") {
@@ -629,7 +630,7 @@ const PreviousForm = ({ question }) => {
           color: "orange"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail, options: false,questionAnswer: "" }] })
 
     }
     else if (item.questionType == "Phone") {
@@ -637,11 +638,11 @@ const PreviousForm = ({ question }) => {
         ...ite,
         {
           field_type: item.questionType,
-          field_jsx: <PhoneQues questionNumber={item.questionNumber} ques={item.questionText} description={item.questionDetail}  />,
+          field_jsx: <PhoneQues questionNumber={item.questionNumber} ques={item.questionText} description={item.questionDetail}   />,
           color: "#8b94d9"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Email") {
       ite = [
@@ -652,7 +653,7 @@ const PreviousForm = ({ question }) => {
           color: "#bcc466"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Multi Line text") {
       ite = [
@@ -663,7 +664,7 @@ const PreviousForm = ({ question }) => {
           color: "yellow"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Slider") {
       ite = [
@@ -674,7 +675,7 @@ const PreviousForm = ({ question }) => {
           color: "#32a889"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Drop Down (Single Choice)") {
       ite = [
@@ -685,7 +686,7 @@ const PreviousForm = ({ question }) => {
           color: "#8988a8"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Drop Down (Multi Choice)") {
       ite = [
@@ -696,7 +697,7 @@ const PreviousForm = ({ question }) => {
           color: "#a89888"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Picture Choice") {
       ite = [
@@ -707,7 +708,7 @@ const PreviousForm = ({ question }) => {
           color: "#b37978"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Yes/No") {
       ite = [
@@ -718,7 +719,7 @@ const PreviousForm = ({ question }) => {
           color: "#b37899"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Ratings") {
       ite = [
@@ -731,7 +732,7 @@ const PreviousForm = ({ question }) => {
 
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "File Upload") {
       ite = [
@@ -742,7 +743,7 @@ const PreviousForm = ({ question }) => {
           color: "#523a63"
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }] })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" }] })
 
     } else if (item.questionType == "Date") {
       ite = [
@@ -754,7 +755,7 @@ const PreviousForm = ({ question }) => {
 
         },
       ];
-      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail }], options: false })
+      dJson.Pages.push({ name: "Page " + item.questionNumber, elements: [{ name: item.questionType, questionNumber: item.questionNumber, questiontitle: item.questionText, questionDescription: item.questionDetail,questionAnswer: "" ,options:false}] })
 
     }
   })
@@ -800,7 +801,7 @@ const PreviousForm = ({ question }) => {
           color: "pink"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: '', questionDescription: '', options: false }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: '', questionDescription: '', options: false,questionAnswer: "" }] })
 
 
     } else if (e == "Multiple Choice") {
@@ -812,7 +813,7 @@ const PreviousForm = ({ question }) => {
           color: "orange"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", optionsList: [], options: true }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", optionsList: [], options: true,questionAnswer: "" }] })
 
     }
     else if (e == "Website") {
@@ -824,7 +825,7 @@ const PreviousForm = ({ question }) => {
           color: "orange"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "", options: false ,questionAnswer: ""}] })
 
     }
     else if (e == "Phone") {
@@ -836,7 +837,7 @@ const PreviousForm = ({ question }) => {
           color: "#8b94d9"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Email") {
       SetFormType([
@@ -847,7 +848,7 @@ const PreviousForm = ({ question }) => {
           color: "#bcc466"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Multi Line Text") {
       SetFormType([
@@ -858,7 +859,7 @@ const PreviousForm = ({ question }) => {
           color: "yellow"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     }
     else if (e == "Multi Line text") {
@@ -870,7 +871,7 @@ const PreviousForm = ({ question }) => {
           color: "yellow"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     }
 
@@ -883,7 +884,7 @@ const PreviousForm = ({ question }) => {
           color: "#32a889"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Drop Down (Single Choice)") {
       SetFormType([
@@ -894,7 +895,7 @@ const PreviousForm = ({ question }) => {
           color: "#8988a8"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Drop Down (Multi Choice)") {
       SetFormType([
@@ -905,7 +906,7 @@ const PreviousForm = ({ question }) => {
           color: "#a89888"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Picture Choice") {
       SetFormType([
@@ -916,7 +917,7 @@ const PreviousForm = ({ question }) => {
           color: "#b37978"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Yes/No") {
       SetFormType([
@@ -927,7 +928,7 @@ const PreviousForm = ({ question }) => {
           color: "#b37899"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,questionAnswer: ""}] })
 
     } else if (e == "Ratings") {
       SetFormType([
@@ -940,7 +941,7 @@ const PreviousForm = ({ question }) => {
 
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "File Upload") {
       SetFormType([
@@ -951,7 +952,7 @@ const PreviousForm = ({ question }) => {
           color: "#523a63"
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }] })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "",questionAnswer: "" }] })
 
     } else if (e == "Date") {
       SetFormType([
@@ -963,7 +964,7 @@ const PreviousForm = ({ question }) => {
 
         },
       ]);
-      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" }], options: false })
+      dJson.Pages.push({ name: "Page " + formType.length, elements: [{ name: e, questionNumber: formType.length + 1, questiontitle: "", questionDescription: "" ,questionAnswer: ""}], options: false })
     }
 
   };

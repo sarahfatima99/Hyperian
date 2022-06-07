@@ -3,7 +3,10 @@ import "../FormFieldTypes/FromFields.css";
 import Rating from "@mui/material/Rating";
 
 
-export default function Ratings({questionNumber , ques,description}) {
+export default function Ratings({questionNumber , ques,description,onQuestionAnswerChange}) {
+  const submitAnswer = (e) =>{
+    onQuestionAnswerChange(e.target.value);
+}
 
   useEffect(() => {
     window.addEventListener('mousemove', () => {});
@@ -35,6 +38,7 @@ export default function Ratings({questionNumber , ques,description}) {
           size="large"
          
           onChange={(event, newValue) => {
+            onQuestionAnswerChange(newValue);
             setValue(newValue);
           }}
         />
