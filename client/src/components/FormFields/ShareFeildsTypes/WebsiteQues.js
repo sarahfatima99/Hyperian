@@ -1,7 +1,10 @@
 import React from 'react'
 
 
-export default function Website({questionNumber,ques,description}) {
+export default function Website({questionNumber,ques,description,onQuestionAnswerChange}) {
+    const submitAnswer = (e) =>{
+        onQuestionAnswerChange(e.target.value);
+    }
     return (
         <div>
             <div className=''>
@@ -10,7 +13,7 @@ export default function Website({questionNumber,ques,description}) {
                 <div className='d-flex flex-row align-item-center'>
                     <textarea style={{paddingTop:"0px" ,marginLeft:"95px",marginTop:"0px"}} type="textarea" disabled className='input-ques description' placeholder="Enter Question Description (optional)" value={description} />
                 </div>
-                <input type="textarea"  className='ans-disabled' placeholder="www.example.com" />
+                <input type="textarea"  className='ans-disabled' placeholder="www.example.com" onChange={submitAnswer} />
             </div>
         </div>
     )

@@ -4,7 +4,10 @@ import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 
 
-export default function SingleLineQues({questionNumber , ques,description}) {
+export default function SingleLineQues({questionNumber , ques,description,onQuestionAnswerChange}) {
+    const submitAnswer = (e) =>{
+        onQuestionAnswerChange(e.target.value);
+    }
     
     return (
         <div>
@@ -15,7 +18,7 @@ export default function SingleLineQues({questionNumber , ques,description}) {
                     <textarea style={{paddingTop:"0px" ,marginLeft:"95px",marginTop:"0px"}} type="textarea" disabled className='input-ques description' placeholder="Enter Question Description (optional)" value={description} />
                 </div>
                <br/>
-                <Slider  defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                <Slider  defaultValue={50} aria-label="Default" valueLabelDisplay="auto" onChange={submitAnswer}/>
             </div>
         </div>  
     )

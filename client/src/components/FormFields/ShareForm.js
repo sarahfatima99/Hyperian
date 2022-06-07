@@ -21,6 +21,7 @@ import "./ShareForm.css";
 
 
 const ShareForm = ({ data, formTittle, formDescription }) => {
+  console.log(data.Pages);
 
   const navigate = useNavigate();
   const [show, setShow] = useState(false);

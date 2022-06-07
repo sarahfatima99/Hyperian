@@ -1,7 +1,10 @@
 import React from "react"
 
 
-const EmailQues =({questionNumber, ques,description}) =>{
+const EmailQues =({questionNumber, ques,description,onQuestionAnswerChange}) =>{
+    const submitAnswer = (e) =>{
+        onQuestionAnswerChange(e.target.value);
+    }
     return(<>
      <div>
             <div className=''>
@@ -10,7 +13,7 @@ const EmailQues =({questionNumber, ques,description}) =>{
                 <div className='d-flex flex-row align-item-center'>
                     <textarea style={{paddingTop:"0px" ,marginLeft:"95px",marginTop:"0px"}} type="textarea" disabled className='input-ques description' placeholder="Enter Question Description (optional)" value={description} />
                 </div>
-                <input type="textarea"  className='ans-disabled' placeholder="Name@example.com" />
+                <input type="textarea"  className='ans-disabled' placeholder="Name@example.com" onChange={submitAnswer} />
                
             </div>
         </div>
